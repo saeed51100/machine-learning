@@ -1,4 +1,5 @@
 {
     "files.autoSave": "afterDelay",
-    "editor.stickyScroll.enabled": false
+    "editor.stickyScroll.enabled": false,
+    "terminal.integrated.cwd": "E:/ubuntu/machine-learning/my-tests"
 }
