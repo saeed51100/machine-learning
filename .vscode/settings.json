@@ -1,5 +1,8 @@
 {
     "files.autoSave": "afterDelay",
     "editor.stickyScroll.enabled": false,
-    "terminal.integrated.cwd": "E:/ubuntu/machine-learning/my-tests"
+    "terminal.integrated.cwd": "E:/ubuntu/machine-learning/my-tests",
+    "git.enableSmartCommit": true,
+    "window.zoomLevel": 1,
+    "editor.minimap.enabled": false,
 }
