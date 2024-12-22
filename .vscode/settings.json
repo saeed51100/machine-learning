@@ -1,7 +1,7 @@
 {
     "files.autoSave": "afterDelay",
     "editor.stickyScroll.enabled": false,
-    "terminal.integrated.cwd": "E:/ubuntu/machine-learning/my-tests",
+    "terminal.integrated.cwd": "E:/ubuntu/machine-learning/jadi-course",
     "window.zoomLevel": 1,
     "editor.minimap.enabled": false,
 }
