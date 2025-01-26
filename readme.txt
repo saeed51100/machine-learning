@@ -16,7 +16,7 @@ run this commands in project directory:
 # To confirm the virtual environment is activated, check the location of your Python interpreter:
 3- which python
 
-4- pip install -r /path/to/requirements.txt
+4- pip install -r requirements.txt
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
 5- deactivate
