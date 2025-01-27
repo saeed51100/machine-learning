@@ -18,7 +18,7 @@ run this commands in project directory:
 # To confirm the virtual environment is activated, check the location of your Python interpreter:
 4- which python
 
-5- set the interpreter to: .venv/bin/python
+5- set the interpreter to: .venv/bin/python3.12 //(latest version)
 
 6- pip install -r requirements.txt
 
