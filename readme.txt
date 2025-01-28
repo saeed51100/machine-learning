@@ -15,12 +15,13 @@ run this commands in project directory:
 # environment-specific python and pip executables into your shell’s PATH.
 3- source .venv/bin/activate
 
+4- set the interpreter to: .venv/bin/python3.12 //(latest version)
+
 # To confirm the virtual environment is activated, check the location of your Python interpreter:
-4- which python
+5- open a new terminal then:
+6- which python
 
-5- set the interpreter to: .venv/bin/python3.12 //(latest version)
-
-6- pip install -r requirements.txt
+7- pip install -r requirements.txt
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
-7- deactivate
+8- deactivate
