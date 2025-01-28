@@ -1,7 +1,7 @@
 
 run this commands in project directory:
 
-1- set the python terminal in your project folder.
+1- set the pycharm terminal in your project folder.
 
 # create the projects virtual environment
 # The second argument is the location to create the virtual environment.
