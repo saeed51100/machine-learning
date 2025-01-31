@@ -1,11 +1,7 @@
 
 1- install requirements of tensor from: https://www.tensorflow.org/install/pip
 
-    # Before installing the Nvidia driver, you need to install the Linux header:
-    # https://askubuntu.com/questions/75709/how-do-i-install-kernel-header-files
-        sudo apt-get install linux-headers-$(uname -r)
-
-    Then:
+    # check if latest nvidia driver is installed in software updater.
 
     a- NVIDIA® GPU drivers
     b- CUDA® Toolkit 12.3.
