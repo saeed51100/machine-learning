@@ -5,7 +5,8 @@
     # install gcc
         sudo apt install build-essential
         gcc --version
-
+    # download cuda runfile from: https://developer.nvidia.com/cuda-downloads
+    # use this link to install runfile: https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html#ubuntu-x86-64-run
 
     a- NVIDIA® GPU drivers
     b- CUDA® Toolkit 12.3.
