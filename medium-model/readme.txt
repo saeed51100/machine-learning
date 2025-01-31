@@ -2,6 +2,10 @@
 1- install requirements of tensor from: https://www.tensorflow.org/install/pip
 
     # check if >= 525.60.13 nvidia driver is installed in software updater.
+    # install gcc
+        sudo apt install build-essential
+        gcc --version
+
 
     a- NVIDIA® GPU drivers
     b- CUDA® Toolkit 12.3.
