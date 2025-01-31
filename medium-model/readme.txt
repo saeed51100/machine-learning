@@ -1,6 +1,4 @@
 
-run this commands in project directory:
-
 1- install requirements of tensor from: https://www.tensorflow.org/install/pip
 
     # Before installing the Nvidia driver, you need to install the Linux header:
