@@ -37,6 +37,8 @@
      .
      and other commands in the above link.
 
+9- keras is installed too?
+
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
 9- deactivate
