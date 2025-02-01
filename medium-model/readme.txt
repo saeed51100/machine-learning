@@ -38,7 +38,8 @@
      and other commands in the above link.
 
 9- numpy and keras is installed with tensorflow.
-10- pip install pandas.
+10- pip install pandas
+11- pip install scikit-learn
 
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
