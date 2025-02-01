@@ -37,7 +37,8 @@
      .
      and other commands in the above link.
 
-9- keras is installed too?
+9- numpy and keras is installed with tensorflow.
+10- pip install pandas.
 
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
