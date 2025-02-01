@@ -1,7 +1,7 @@
 
 1- install requirements of tensor from: https://www.tensorflow.org/install/pip
 
-    # check if >= 525.60.13 nvidia driver is installed in software updater.
+    # check if >= 525.60.13 nvidia driver is installed in software updater else goto step 2.
     # install gcc
         sudo apt install build-essential
         gcc --version
@@ -27,6 +27,15 @@
 7- which python
 
 8- install tensorflow from: https://www.tensorflow.org/install/pip
+     pip install --upgrade pip
+     # For GPU users
+     pip install tensorflow[and-cuda]
+     # For CPU users
+     pip install tensorflow
+     .
+     .
+     .
+     and other commands in the above link.
 
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
