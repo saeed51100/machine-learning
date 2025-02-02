@@ -8,6 +8,7 @@
         gcc --version
     # download and install cuda deb(local) from:
         https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=24.04&target_type=deb_local
+    # run 2,3,4 steps in Debian Installer from this link: https://docs.nvidia.com/cuda/cuda-quick-start-guide/#debian-x86-64-deb
 
     a- NVIDIA® GPU drivers
     b- CUDA® Toolkit 12.3.
