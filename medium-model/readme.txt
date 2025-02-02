@@ -9,6 +9,14 @@
     # download and install cuda deb(local) from:
         https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=24.04&target_type=deb_local
     # run 2,3,4 steps in Debian Installer from this link: https://docs.nvidia.com/cuda/cuda-quick-start-guide/#debian-x86-64-deb
+    # https://www.youtube.com/watch?v=8i3BiWa5AZ4
+    # run nvidia-smi to see cuda version
+    # Post-installation Actions from this link: https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#environment-setup
+        add this lines to end of Home/.bashrc:
+            export PATH=/usr/local/cuda-12.6/bin${PATH:+:${PATH}}
+            export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+    # run gcc --version
+    ********** continue create sample from the above YouTube link tomorrow! *************************************************************
 
     a- NVIDIA® GPU drivers
     b- CUDA® Toolkit 12.3.
