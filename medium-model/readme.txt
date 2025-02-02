@@ -1,5 +1,6 @@
+1- sudo apt update && sudo apt upgrade
 
-1- install requirements of tensor from: https://www.tensorflow.org/install/pip
+2- install requirements of tensor from: https://www.tensorflow.org/install/pip
 
     # check if >= 525.60.13 nvidia driver is installed in software updater else goto step 2.
     # install gcc
@@ -12,25 +13,25 @@
     b- CUDA® Toolkit 12.3.
     c- cuDNN SDK 8.9.7.
 
-2- set the pycharm terminal in your project folder.
+3- set the pycharm terminal in your project folder.
 
 # create the projects virtual environment
-3- python3 -m venv .venv
+4- python3 -m venv .venv
 
 # activate the virtual environment
-4- source .venv/bin/activate
+5- source .venv/bin/activate
 
-5- set the interpreter to: .venv/bin/python3.12 //(latest version)
+6- set the interpreter to: .venv/bin/python3.12 //(latest version)
 
 # To confirm the virtual environment is activated, check the location of your Python interpreter:
-6- open a new terminal then:
-7- which python
+7- open a new terminal then:
+8- which python
 
-8- Prepare pip
+9- Prepare pip
      pip install --upgrade pip
      pip --version
 
-9- install tensorflow from: https://www.tensorflow.org/install/pip
+10- install tensorflow from: https://www.tensorflow.org/install/pip
      # For GPU users
      pip install tensorflow[and-cuda]
      # For CPU users
@@ -40,10 +41,10 @@
      .
      and other commands in the above link.
 
-10- numpy and keras is installed with tensorflow.
-11- pip install pandas
-12- pip install scikit-learn
+11- numpy and keras is installed with tensorflow.
+12- pip install pandas
+13- pip install scikit-learn
 
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
-13- deactivate
+14- deactivate
