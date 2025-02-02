@@ -26,8 +26,12 @@
 6- open a new terminal then:
 7- which python
 
-8- install tensorflow from: https://www.tensorflow.org/install/pip
+8- Prepare pip
      pip install --upgrade pip
+     pip --version
+     pip 25.0 from .../.venv/lib/python3.12/site-packages
+
+9- install tensorflow from: https://www.tensorflow.org/install/pip
      # For GPU users
      pip install tensorflow[and-cuda]
      # For CPU users
@@ -37,10 +41,10 @@
      .
      and other commands in the above link.
 
-9-  numpy and keras is installed with tensorflow.
-10- pip install pandas
-11- pip install scikit-learn
+10- numpy and keras is installed with tensorflow.
+11- pip install pandas
+12- pip install scikit-learn
 
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
-9- deactivate
+13- deactivate
