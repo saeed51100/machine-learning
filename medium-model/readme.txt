@@ -29,7 +29,6 @@
 8- Prepare pip
      pip install --upgrade pip
      pip --version
-     pip 25.0 from .../.venv/lib/python3.12/site-packages
 
 9- install tensorflow from: https://www.tensorflow.org/install/pip
      # For GPU users
