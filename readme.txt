@@ -1,27 +1,59 @@
+1- sudo apt update && sudo apt upgrade
 
-run this commands in project directory:
+2- install requirements of tensor from: https://www.tensorflow.org/install/pip
 
-1- set the pycharm terminal in your project folder.
+    # check if >= 525.60.13 nvidia driver is installed in software updater else goto step 2.
+    # install gcc
+        sudo apt install build-essential
+        gcc --version
+    # download and install cuda deb(local) from:
+        https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=24.04&target_type=deb_local
+    # run 2,3,4 steps in Debian Installer from this link: https://docs.nvidia.com/cuda/cuda-quick-start-guide/#debian-x86-64-deb
+    # https://www.youtube.com/watch?v=8i3BiWa5AZ4
+    # run nvidia-smi to see cuda version
+    # Post-installation Actions from this link: https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#environment-setup
+        add this lines to end of Home/.bashrc:
+            export PATH=/usr/local/cuda-12.6/bin${PATH:+:${PATH}}
+            export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+    # run gcc --version
+    ********** continue create sample from the above YouTube link tomorrow! *************************************************************
+
+    a- NVIDIA® GPU drivers
+    b- CUDA® Toolkit 12.3.
+    c- cuDNN SDK 8.9.7.
+
+3- set the pycharm terminal in your project folder.
 
 # create the projects virtual environment
-# The second argument is the location to create the virtual environment.
-# Generally, you can just create this in your project and call it .venv.
-# venv will create a virtual Python installation in the .venv folder.
-2- python3 -m venv .venv
+4- python3 -m venv .venv
 
 # activate the virtual environment
-# Before you can start installing or using packages in your virtual environment
-# you’ll need to activate it. Activating a virtual environment will put the virtual
-# environment-specific python and pip executables into your shell’s PATH.
-3- source .venv/bin/activate
+5- source .venv/bin/activate
 
-4- set the interpreter to: .venv/bin/python3.12 //(latest version)
+6- set the interpreter to: .venv/bin/python3.12 //(latest version)
 
 # To confirm the virtual environment is activated, check the location of your Python interpreter:
-5- open a new terminal then:
-6- which python
+7- open a new terminal then:
+8- which python
 
-7- pip install -r requirements.txt
+9- Prepare pip
+     pip install --upgrade pip
+     pip --version
+
+10- install tensorflow from: https://www.tensorflow.org/install/pip
+     # For GPU users
+     pip install tensorflow[and-cuda]
+     # For CPU users
+     pip install tensorflow
+     .
+     .
+     .
+     and other commands in the above link.
+
+11- numpy and keras is installed with tensorflow.
+12- pip install pandas
+13- pip install scikit-learn
+
 
 # If you want to switch projects or leave your virtual environment, deactivate the environment:
-8- deactivate
+14- deactivate
