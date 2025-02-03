@@ -1,8 +1,10 @@
 1- sudo apt update && sudo apt upgrade
 
-2- install requirements of tensor from: https://www.tensorflow.org/install/pip
+2- if you have new nvidia gpu install requirements of tensor from:
+        https://www.tensorflow.org/install/pip
+        else go to step 3.
 
-    # check if >= 525.60.13 nvidia driver is installed in software updater else goto step 2.
+    # check if >= 525.60.13 nvidia driver is installed in software updater
     # install gcc
         sudo apt install build-essential
         gcc --version
