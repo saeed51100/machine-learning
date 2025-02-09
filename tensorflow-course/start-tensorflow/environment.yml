@@ -1,0 +1,9 @@
+name: myenv
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12  # Or your preferred version
+  - numpy
+  - pandas
+  - tensorflow  # Or tensorflow-cpu if needed
+  - scikit-learn
