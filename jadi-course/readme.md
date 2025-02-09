@@ -8,5 +8,6 @@ conda list
 conda env list
 conda info --envs
 
+
 conda deactivate
 ```
