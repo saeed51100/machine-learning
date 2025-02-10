@@ -23,3 +23,7 @@ conda env list
 ```
 conda info --envs
 ```
+---
+```
+conda remove --name myenv --all
+```
