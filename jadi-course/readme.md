@@ -1,6 +1,6 @@
 ### Useful commands:
 ```bash
-   conda create --prefix ./envs --file environment.yml
+   conda env create --prefix ./envs -f environment.yml
 ```
 ```bash
    conda env update -f environment.yml
