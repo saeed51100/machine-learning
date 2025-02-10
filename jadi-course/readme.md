@@ -9,10 +9,8 @@
 ---
      Only if needed for terminal work: (Usually not needed in PyCharm.)
      conda activate myenv
+     conda deactivate
 
-```bash
-   conda deactivate
-```
 ---
 ```bash
    conda list
