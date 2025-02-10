@@ -1,4 +1,4 @@
-### Useful commands:
+### Commands:
 ```
 conda env create --prefix ./envs -f environment.yml
 ```
