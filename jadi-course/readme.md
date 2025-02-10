@@ -6,11 +6,14 @@
    conda env update -f environment.yml
 ```
      Set python interpreter to: /home/saeed/miniconda3/envs/myenv/bin/python3.12
+---
+     Only if needed for terminal work:
+     conda activate myenv
 
-
-
-   conda activate myenv
-
+```bash
+   conda deactivate
+```
+---
 ```bash
    conda list
 ```
@@ -19,7 +22,4 @@
 ```
 ```bash
    conda info --envs
-```
-```bash
-   conda deactivate
 ```
