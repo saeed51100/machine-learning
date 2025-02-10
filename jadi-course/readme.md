@@ -5,7 +5,10 @@
 ```bash
    conda env update -f environment.yml
 ```
-```bash
+     Set python interpreter to: /home/saeed/miniconda3/envs/myenv/bin/python3.12
+
+
+
    conda activate myenv
 ```
 ```bash
