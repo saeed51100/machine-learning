@@ -10,7 +10,7 @@
 
 
    conda activate myenv
-```
+
 ```bash
    conda list
 ```
