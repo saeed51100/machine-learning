@@ -13,7 +13,7 @@ Set python interpreter to:
 ---
      Only if needed for terminal work: (Usually not needed in PyCharm.)
      #conda activate ./envs
-     conda activate /media/saeed/New\ Volume/repositories/machine-learning/jadi-course/envs   
+     conda activate "/media/saeed/New Volume/repositories/machine-learning/jadi-course/envs"   
      conda deactivate
 ---
 ```
