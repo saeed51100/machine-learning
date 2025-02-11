@@ -6,7 +6,8 @@ conda env create --prefix ./envs -f environment.yml
 conda env update -f environment.yml --prune
 ```
 ```
-Set python interpreter to: /home/saeed/miniconda3/envs/myenv/bin/python3.12
+Set python interpreter to:  
+/media/saeed/New Volume/repositories/machine-learning/jadi-course/envs/bin/python3.12
 ```
 
 ---
