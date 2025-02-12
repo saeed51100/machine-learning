@@ -11,10 +11,21 @@ Set python interpreter to:
 ```
 
 ---
-     Only if needed for terminal work: (Usually not needed in PyCharm.)
-     conda activate ./envs   
+     conda activate ./envs
+     conda activate ./bade
      conda deactivate
 ---
+
+```
+for remove environments:
+first deactivate all environments check:
+conda env list
+then:
+conda env remove --prefix ./envs
+if not remove completelly you should remove folder manually:
+sudo rm -rf 
+```
+
 ```
 conda list
 ```
@@ -23,8 +34,4 @@ conda env list
 ```
 ```
 conda info --envs
-```
----
-```
-conda remove "/media/saeed/New Volume/repositories/machine-learning/jadi-course/envs" --all
 ```
