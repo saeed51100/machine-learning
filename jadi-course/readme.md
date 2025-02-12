@@ -1,5 +1,8 @@
 ### Commands:
 ```
+set the pycharm terminal in your project folder.
+```
+```
 conda env create --prefix ./envs -f environment.yml
 ```
 ```
