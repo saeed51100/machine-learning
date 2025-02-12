@@ -25,7 +25,7 @@ conda env remove --prefix ./envs
 if not remove completelly you should remove folder manually:
 sudo rm -rf envs
 ```
-
+---
 ```
 conda list
 ```
