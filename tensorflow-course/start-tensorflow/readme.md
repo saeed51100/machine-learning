@@ -15,6 +15,9 @@
 
 ### Commands:
 ```
+Install cuda and cudnn for gpu tensorflow 
+```
+```
 set the pycharm terminal in your project folder.
 ```
 ```
