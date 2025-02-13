@@ -5,6 +5,7 @@ dependencies:
   - numpy
   - pandas
   - tensorflow  # Or tensorflow-cpu if needed
+  - keras
   - scikit-learn
 
 
