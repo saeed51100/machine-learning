@@ -3,6 +3,10 @@
 set the pycharm terminal in your project folder.
 ```
 ```
+Set pycharm interpreter to base:  
+/home/saeed/miniconda3/bin/python
+```
+```
 conda activate base
 ```
 ```
@@ -10,8 +14,8 @@ conda create --prefix ./envs tensorflow-gpu numpy pandas scikit-learn
 ```
 
 ```
-Set python interpreter to:  
-/media/saeed/New Volume/repositories/machine-learning/jadi-course/envs/bin/python
+Set pycharm interpreter to:  
+./envs/bin/python
 ```
 
 ---
