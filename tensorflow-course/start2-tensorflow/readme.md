@@ -3,6 +3,9 @@
 set the pycharm terminal in your project folder.
 ```
 ```
+conda activate base
+```
+```
 conda create --prefix ./envs tensorflow-gpu numpy pandas scikit-learn
 ```
 
@@ -13,7 +16,7 @@ Set python interpreter to:
 
 ---
      conda activate ./envs
-     conda activate ./bade
+     conda activate bade
      conda deactivate
 ---
 
