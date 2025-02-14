@@ -1,12 +1,10 @@
 name: null
 channels:
   - conda-forge
+  - defaults
 dependencies:
   - python=3.11  # Tensorflow only supports Python 3.8 to 3.11 ( in feb 14 2025 )
   - numpy
   - pandas
   - tensorflow  # Or tensorflow-cpu if needed
   - scikit-learn
-
-
-
