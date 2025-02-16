@@ -55,7 +55,7 @@ sudo rm -rf envs
 ```
 ---
 ```
-conda list
+conda list55555
 ```
 ```
 conda env list
