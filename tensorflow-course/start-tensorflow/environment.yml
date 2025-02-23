@@ -8,7 +8,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.11.0rc1  # Replace with the correct version
+  - python=3.11  # Replace with the correct version
   - pip
   - pip:
       - tensorflow==2.18.0  # Replace with extracted version
