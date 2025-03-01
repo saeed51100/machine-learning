@@ -21,11 +21,11 @@ Install cuda for tensorflow gpu
 set the pycharm terminal in your project folder.
 ```
 ```
+conda activate base
+```
+```
 Set pycharm interpreter to base:  
 /home/saeed/miniconda3/bin/python
-```
-```
-conda activate base
 ```
 ```
 conda env create --prefix ./envs -f environment.yml
