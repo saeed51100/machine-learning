@@ -21,5 +21,4 @@ dependencies:
   - scikit-learn
   - pip:
       - tensorflow==2.18.0  # Replace with extracted version
-      - scikeras
 
