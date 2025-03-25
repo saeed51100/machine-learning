@@ -1,5 +1,5 @@
 .venv/
 envs/
-tb_log3/
 housing_reg_model.keras
 *.keras
+*.v2
