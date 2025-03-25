@@ -3,3 +3,4 @@ envs/
 housing_reg_model.keras
 *.keras
 *.v2
+*.json
