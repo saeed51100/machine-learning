@@ -4,3 +4,4 @@ envs/
 *.keras
 *.v2
 *.json
+*.h5
