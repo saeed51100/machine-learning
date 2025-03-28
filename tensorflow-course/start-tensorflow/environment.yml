@@ -18,8 +18,7 @@ dependencies:
   - numpy
   - pandas
   - matplotlib
-  - pip:
-      - tensorflow==2.18.0  # Replace with extracted version
-      - scikit-learn
-      - scikeras
+  - tensorflow
+  - scikit-learn
+  - scikeras
 
