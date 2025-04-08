@@ -1,0 +1,14 @@
+name: null
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11  # Replace with the correct version
+  - pip
+  - numpy
+  - pandas
+  - matplotlib
+  - tensorflow
+  - scikit-learn==1.5.2
+  - scikeras
+
