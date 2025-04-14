@@ -22,4 +22,7 @@ dependencies:
   - scikit-learn==1.5.2
   - scikeras
   - ta
-
+  - seaborn
+  - matplotlib-inline
+  - ipython
+  - jupyter
