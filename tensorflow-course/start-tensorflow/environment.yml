@@ -25,4 +25,5 @@ dependencies:
   - matplotlib-inline
   - ipython
   - jupyter
+  - ta-lib
 
