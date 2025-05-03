@@ -26,6 +26,3 @@ dependencies:
   - ipython
   - jupyter
   - ta-lib
-  - nbformat
-  - nbconvert
-

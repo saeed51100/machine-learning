@@ -8,5 +8,7 @@ mv file1_raw.json file1.ipynb
 
 jupyter nbconvert --to python file1.ipynb
 
+  - nbformat
+  - nbconvert
 
 
