@@ -1,0 +1,12 @@
+cp file1.ipynb file1_raw.json
+
+
+"nbformat": 4,
+"nbformat_minor": 5,
+
+mv file1_raw.json file1.ipynb
+
+jupyter nbconvert --to python file1.ipynb
+
+
+
