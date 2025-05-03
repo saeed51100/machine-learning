@@ -12,3 +12,7 @@ jupyter nbconvert --to python file1.ipynb
   - nbconvert
 
 
+# file1.ipynb
+def show_message():
+    print("Text from file1")
+
