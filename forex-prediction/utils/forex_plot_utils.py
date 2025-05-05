@@ -27,7 +27,8 @@ def load_csv_with_datetime(csv_path):
     df['DATETIME'] = pd.to_datetime(df['<DATE>'] + ' ' + df['<TIME>'], format='%Y.%m.%d %H:%M:%S')
     return df[['DATETIME', '<CLOSE>']].reset_index(drop=True)
 
-def plot_all_series(historical_df, predicted_df, actual_future_df, title, output_path=None):
+def plot_all_series(historical_df=None, predicted_df=None, actual_future_df=None, title="", output_path=None):
+
     """
     Plots available data series for closing prices.
     """
