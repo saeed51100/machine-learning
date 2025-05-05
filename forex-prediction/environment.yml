@@ -9,3 +9,4 @@ dependencies:
   - matplotlib
   - ta-lib
   - tensorflow
+  - scikit-learn==1.5.2
