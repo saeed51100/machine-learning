@@ -12,5 +12,5 @@ Model: "sequential"
  Optimizer params: 10,390 (40.59 KB)
 
 
-Final Training Loss: 0.043586
-Final Test Loss: 0.054491
+Final Training Loss: 0.042446
+Final Test Loss: 0.080455
