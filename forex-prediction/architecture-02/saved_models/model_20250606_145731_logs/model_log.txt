@@ -2,15 +2,15 @@ Model: "sequential"
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ lstm (LSTM)                     │ (None, 32)             │         4,864 │
+│ lstm (LSTM)                     │ (None, 32)             │         5,632 │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
 │ dense (Dense)                   │ (None, 10)             │           330 │
 └─────────────────────────────────┴────────────────────────┴───────────────┘
- Total params: 15,584 (60.88 KB)
- Trainable params: 5,194 (20.29 KB)
+ Total params: 17,888 (69.88 KB)
+ Trainable params: 5,962 (23.29 KB)
  Non-trainable params: 0 (0.00 B)
- Optimizer params: 10,390 (40.59 KB)
+ Optimizer params: 11,926 (46.59 KB)
 
 
-Final Training Loss: 0.026679
-Final Test Loss: 0.040499
+Final Training Loss: 0.025271
+Final Test Loss: 0.045565
