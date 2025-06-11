@@ -10,3 +10,4 @@ dependencies:
   - ta-lib
   - tensorflow
   - scikit-learn==1.5.2
+  - seaborn
