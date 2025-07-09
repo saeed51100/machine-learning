@@ -11,3 +11,4 @@ dependencies:
   - tensorflow
   - scikit-learn==1.5.2
   - seaborn
+  - keras-tuner
