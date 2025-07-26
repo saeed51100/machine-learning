@@ -1,22 +1,18 @@
 #%% md
 # # After changes: refactor > Convert To Python File
 #%%
-# forex_plot_utils.ipynb
+import pandas as pd
+import matplotlib.pyplot as plt
 
-# PARAMETERS (can be overridden in calling notebook)
+# GLOBAL STYLES
 vertical_line_color = 'gray'
-vertical_line_width = 2  # Bolder vertical line
+vertical_line_width = 2
 
 colors = {
     'historical': 'black',
     'actual': 'green',
     'predicted': 'red'
 }
-
-# IMPORTS
-import pandas as pd
-import matplotlib.pyplot as plt
-import os
 
 # UTILITY FUNCTIONS
 def load_csv_with_datetime(csv_path):
@@ -28,49 +24,51 @@ def load_csv_with_datetime(csv_path):
     return df[['DATETIME', '<CLOSE>']].reset_index(drop=True)
 
 def plot_all_series(historical_df=None, predicted_df=None, actual_future_df=None, title="", output_path=None):
+    """
+    Plots:
+    - Historical & actual <CLOSE> prices (line plot)
+    - Regression forecasts (dashed line)
+    - Classification signals (vertical gray lines with 'buy' or 'sell' labels)
+    """
 
-    """
-    Plots available data series:
-    - Line plots for <CLOSE> if present
-    - Vertical markers for 'buy'/'sell' if predicted_df has classification labels
-    """
     plt.figure(figsize=(14, 6))
     plotted = False
 
-    # Plot historical prices
+    # Historical <CLOSE>
     if historical_df is not None and '<CLOSE>' in historical_df.columns:
         plt.plot(historical_df['DATETIME'], historical_df['<CLOSE>'],
                  label='Historical', color=colors['historical'])
         plotted = True
 
-    # Plot actual future prices
+    # Actual future <CLOSE>
     if actual_future_df is not None and '<CLOSE>' in actual_future_df.columns:
         plt.plot(actual_future_df['DATETIME'], actual_future_df['<CLOSE>'],
                  label='Actual Future', color=colors['actual'])
         plotted = True
 
-    # Plot predicted prices (regression)
+    # Regression forecast <CLOSE>
     if predicted_df is not None:
         if '<CLOSE>' in predicted_df.columns:
-            # Regression forecast
             plt.plot(predicted_df['DATETIME'], predicted_df['<CLOSE>'],
                      label='Predicted', color=colors['predicted'], linestyle='--')
             plotted = True
 
-        # Plot classification reversal markers (buy/sell)
+        # Classification forecast (buy/sell markers)
         if 'label' in predicted_df.columns:
-            for i, row in predicted_df.iterrows():
+            for _, row in predicted_df.iterrows():
                 if row['label'] in ['buy', 'sell']:
-                    plt.axvline(x=row['DATETIME'], color='red' if row['label'] == 'sell' else 'blue',
-                                linestyle=':', linewidth=vertical_line_width,
-                                label=row['label'].capitalize() if i == 0 else "")  # avoid duplicate labels
+                    plt.axvline(x=row['DATETIME'], color=vertical_line_color,
+                                linestyle='--', linewidth=vertical_line_width)
+                    plt.text(row['DATETIME'], plt.ylim()[1], row['label'],
+                             color='black', ha='center', va='top', fontsize=9, rotation=90)
 
-    # Vertical line to show where prediction starts
+    # Prediction start marker
     if historical_df is not None:
         prediction_start_time = historical_df['DATETIME'].iloc[-1]
         plt.axvline(x=prediction_start_time, color=vertical_line_color,
                     linestyle='--', linewidth=vertical_line_width, label='Prediction Start')
 
+    # Final plot styling
     plt.title(title)
     plt.xlabel('Time')
     plt.ylabel('Close Price')
@@ -82,6 +80,5 @@ def plot_all_series(historical_df=None, predicted_df=None, actual_future_df=None
     if output_path:
         plt.savefig(output_path)
     plt.show()
-
 
 #%%
