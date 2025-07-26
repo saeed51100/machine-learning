@@ -30,26 +30,42 @@ def load_csv_with_datetime(csv_path):
 def plot_all_series(historical_df=None, predicted_df=None, actual_future_df=None, title="", output_path=None):
 
     """
-    Plots available data series for closing prices.
+    Plots available data series:
+    - Line plots for <CLOSE> if present
+    - Vertical markers for 'buy'/'sell' if predicted_df has classification labels
     """
     plt.figure(figsize=(14, 6))
     plotted = False
 
-    if historical_df is not None:
+    # Plot historical prices
+    if historical_df is not None and '<CLOSE>' in historical_df.columns:
         plt.plot(historical_df['DATETIME'], historical_df['<CLOSE>'],
                  label='Historical', color=colors['historical'])
         plotted = True
 
-    if actual_future_df is not None:
+    # Plot actual future prices
+    if actual_future_df is not None and '<CLOSE>' in actual_future_df.columns:
         plt.plot(actual_future_df['DATETIME'], actual_future_df['<CLOSE>'],
                  label='Actual Future', color=colors['actual'])
         plotted = True
 
+    # Plot predicted prices (regression)
     if predicted_df is not None:
-        plt.plot(predicted_df['DATETIME'], predicted_df['<CLOSE>'],
-                 label='Predicted', color=colors['predicted'], linestyle='--')
-        plotted = True
+        if '<CLOSE>' in predicted_df.columns:
+            # Regression forecast
+            plt.plot(predicted_df['DATETIME'], predicted_df['<CLOSE>'],
+                     label='Predicted', color=colors['predicted'], linestyle='--')
+            plotted = True
 
+        # Plot classification reversal markers (buy/sell)
+        if 'label' in predicted_df.columns:
+            for i, row in predicted_df.iterrows():
+                if row['label'] in ['buy', 'sell']:
+                    plt.axvline(x=row['DATETIME'], color='red' if row['label'] == 'sell' else 'blue',
+                                linestyle=':', linewidth=vertical_line_width,
+                                label=row['label'].capitalize() if i == 0 else "")  # avoid duplicate labels
+
+    # Vertical line to show where prediction starts
     if historical_df is not None:
         prediction_start_time = historical_df['DATETIME'].iloc[-1]
         plt.axvline(x=prediction_start_time, color=vertical_line_color,
@@ -66,5 +82,6 @@ def plot_all_series(historical_df=None, predicted_df=None, actual_future_df=None
     if output_path:
         plt.savefig(output_path)
     plt.show()
+
 
 #%%
