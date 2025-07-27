@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # GLOBAL STYLES
 vertical_line_color = 'gray'
-vertical_line_width = 2
+vertical_line_width = 3
 
 colors = {
     'historical': 'black',
@@ -57,10 +57,19 @@ def plot_all_series(historical_df=None, predicted_df=None, actual_future_df=None
         if 'label' in predicted_df.columns:
             for _, row in predicted_df.iterrows():
                 if row['label'] in ['buy', 'sell']:
-                    plt.axvline(x=row['DATETIME'], color=vertical_line_color,
-                                linestyle='--', linewidth=vertical_line_width)
-                    plt.text(row['DATETIME'], plt.ylim()[1], row['label'],
-                             color='black', ha='center', va='top', fontsize=9, rotation=90)
+                    plt.axvline(x=row['DATETIME'], color="yellow",
+                                linewidth=1)
+                    plt.text(
+                        row['DATETIME'],
+                        plt.ylim()[1],
+                        row['label'],
+                        color='black',
+                        ha='center',
+                        va='top',
+                        fontsize=13,
+                        rotation=90,
+                        bbox=dict(facecolor='white', edgecolor='none', alpha=0.7)
+                    )
 
     # Prediction start marker
     if historical_df is not None:
@@ -80,5 +89,4 @@ def plot_all_series(historical_df=None, predicted_df=None, actual_future_df=None
     if output_path:
         plt.savefig(output_path)
     plt.show()
-
 #%%
