@@ -13,4 +13,6 @@ dependencies:
   - seaborn
   - keras-tuner
   - jupyter
-  - pandas-ta
+  - pip
+  - pip:
+      - https://github.com/jbn/ZigZag/archive/refs/heads/main.zip
