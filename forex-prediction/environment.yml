@@ -13,3 +13,4 @@ dependencies:
   - seaborn
   - keras-tuner
   - jupyter
+  - pandas-ta
