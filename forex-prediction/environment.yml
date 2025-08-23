@@ -14,5 +14,4 @@ dependencies:
   - keras-tuner
   - jupyter
   - pip
-  - pip:
-      - https://github.com/jbn/ZigZag/archive/refs/heads/main.zip
+  - pandas-ta
