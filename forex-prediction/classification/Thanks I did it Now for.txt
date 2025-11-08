@@ -1,0 +1,74 @@
+Please think long and hard.
+I am a developer and I program with Python in Jupyter. I want you to help me write a Forex time-series classification program.
+
+Goal: give the model WINDOW_SIZE = 60 unseen hourly candles and have the model predict trend reversal points for the next FORECAST_HORIZON = 10 hours immediately after the 60th candle. The model must output class labels for each of the 10 forecast hours: 0 = no signal, 1 = buy, 2 = sell. Only actual reversal points should be labeled 1 or 2 (most forecast steps should be 0).
+
+# --------------------------
+Data (training dataset)
+# --------------------------
+
+* File DataFrame name: df_model
+* Rows: ~130,000 (continuous hourly series; gaps from holidays already filled)
+* Columns (11 total), sample rows:
+
+DATETIME,DATE,TIME,OPEN,HIGH,LOW,CLOSE,TICKVOL,VOL,SPREAD,Label
+2008-11-28 00:00:00,NaN,NaN,10.36,10.36,10.32,10.33,0.0,0.0,0.0,0
+2008-11-28 01:00:00,NaN,NaN,10.36,10.36,10.32,10.33,0.0,0.0,0.0,0
+2008-11-28 02:00:00,2008.11.28,02:00:00,10.32,10.33,10.30,10.30,10.0,0.0,0.0,0
+...
+
+
+* DATETIME is continuous (index-like).
+
+* Label column contains ground-truth reversal points: 0, 1, 2. The model should learn to reproduce this labeling for the horizon.
+
+# --------------------------
+Features and hyperparameters (must be used)
+# --------------------------
+
+WINDOW_SIZE = 60
+FORECAST_HORIZON = 10
+FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
+
+# --------------------------
+Requirements for the code you will write (MODEL + PREDICTION)
+# --------------------------
+
+1- Use df_model as the training dataset (it is already preprocessed/continuous).
+
+2- Build an efficient, effective classification model that predicts reversal points (0/1/2) over the 10-hour horizon given the last 60 hourly candles.
+
+3- The prediction pipeline must take a given_time from df ( not from df_model ) wich identifies the last available candle.
+I have already prepared df which has a structure similar to df_model and 60 unseen candles are selected from it.
+
+Use the specific given_time below for prediction tests:
+given_time = "2025.08.13 21:00:00"
+
+The prediction input should be the 60 candles that end at given_time (inclusive or as you design it, but be explicit in your code). 
+The model should then output a length-10 array of class predictions for the next 10 hours immediately after given_time.
+
+4- The output must be realistic in that not all 10 forecast hours are labeled 1 or 2 — only actual reversal points should be labeled.
+
+Example (acceptable):
+Predicted Classes (0=no signal,1=buy,2=sell): [0 0 0 1 0 0 0 0 0 0]
+
+Example (unacceptable):
+[2 2 2 1 1 1 1 1 1 1]
+
+
+5- At the end of the prediction section your code must provide a DataFrame named predicted_df and return / show it as the last line. 
+predicted_df should include at least the forecast DATETIME for each of the 10 steps, the predicted class, and optionally predicted probabilities for each class.
+
+# --------------------------
+Deliverable (when you write the code)
+# --------------------------
+
+* A MODEL section that builds/trains (or defines/loading procedure for) a trained model suitable for this classification task (you may use TensorFlow/Keras; make clear training choices).
+
+* A PREDICTION section that:
+
+	- Prepares the 60-candle input (scaling/feature selection) from df_model using given_time.
+	- Runs the model to predict probabilities and classes for the next 10 hours.
+	- Produces predicted_df as the last line of code. predicted_df must contain DATETIME (10 rows), 		forecast_class, and optionally prob_0, prob_1, prob_2.
+
+* Keep training/architecture choices, class-imbalance handling, and evaluation considerations sensible and commented.
