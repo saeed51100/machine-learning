@@ -1,0 +1,40 @@
+The model is predicting all sells because it's learning the dominant pattern in your data rather than being selective about reversal points. 
+I need to add several key improvements:
+
+1- Post-processing logic to suppress non-reversal predictions
+2- Threshold-based filtering using probability confidence
+3- Temporal consistency checks (reversals should be sparse)
+4- Better training strategy focusing on precision over recall
+        
+Perfect! I've made critical improvements to ensure realistic reversal predictions:
+Key Changes:
+1. Adjusted Sample Weights (Training)
+
+	- Class 0 (no signal): weight = 0.1 (de-emphasized)
+	- Class 1 & 2 (reversals): weight = 10.0 (heavily emphasized)
+	- This teaches the model that reversals are rare but important
+
+2. Post-Processing Filters (Prediction)
+
+Added two intelligent filtering functions:
+* apply_reversal_filters():
+
+	- Confidence threshold: Only accepts reversals with 65%+ probability
+	- Relative strength check: Reversal probability must be 1.5x stronger than no-signal probability
+	- Max signals limit: Allows maximum 2 reversal signals per 10-hour window
+	- Sorts by confidence: Keeps only the most confident reversal predictions
+
+* temporal_consistency_check():
+
+	- Prevents contradictory signals (buy immediately followed by sell)
+	- Removes the weaker of two conflicting signals
+
+3. Output Enhancement
+
+	- Shows raw predictions (before filtering) for transparency
+	- Shows filtered predictions (the final output)
+	- Displays specific reversal signal details with timestamps and confidence
+
+4. Lower Learning Rate
+
+Reduced from 0.001 to 0.0005 for more stable convergence
