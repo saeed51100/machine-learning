@@ -50,7 +50,7 @@ given_time = "2025.08.13 21:00:00"
 The prediction input should be the 60 candles that end at given_time.
 The model should then output a length-10 array of class predictions for the next 10 hours immediately after given_time.
 
-4- Since trend-reversal labels (1 and 2) are rare compared to label 0, use code similar to the following to handle class imbalance:
+4- Since trend-reversal labels (1 and 2) are much rare compared to label 0, use code similar to the following to handle class imbalance:
 
 # Create sample weights for training
 sample_weights = np.ones_like(y_train, dtype=np.float32)
