@@ -1,13 +1,15 @@
 Please think long and hard.
 I am a developer and I program with Python in Jupyter. I want you to help me write a Forex time-series classification program.
 
-Goal: give the model WINDOW_SIZE = 60 unseen hourly candles and have the model predict trend reversal points for the next FORECAST_HORIZON = 10 hours immediately after the 60th candle. The model must output class labels for each of the 10 forecast hours: 0 = no signal, 1 = buy, 2 = sell. Only actual reversal points should be labeled 1 or 2 (most forecast steps should be 0).
+Goal: give the model WINDOW_SIZE = 60 unseen hourly candles and have the model predict trend reversal points for the next FORECAST_HORIZON = 10 hours immediately after the 60th candle.
+The model must output class labels for each of the 10 forecast hours: 0 = no signal, 1 = buy, 2 = sell.
+Only actual reversal points should be labeled 1 or 2 (most forecast steps should be 0).
 
 # --------------------------
 Data (training dataset)
 # --------------------------
 
-* File DataFrame name: df_model
+* DataFrame name: df_model
 * Rows: ~130,000 (continuous hourly series; gaps from holidays already filled)
 * Columns (11 total), sample rows:
 
@@ -20,7 +22,8 @@ DATETIME,DATE,TIME,OPEN,HIGH,LOW,CLOSE,TICKVOL,VOL,SPREAD,Label
 
 * DATETIME is continuous (index-like).
 
-* Label column contains ground-truth reversal points: 0, 1, 2. The model should learn to reproduce this labeling for the horizon.
+* Label column contains trend reversal points: 0, 1, 2.
+The model should learn to reproduce this labeling.
 
 # --------------------------
 Features and hyperparameters (must be used)
@@ -44,7 +47,7 @@ I have already prepared df which has a structure similar to df_model and 60 unse
 Use the specific given_time below for prediction tests:
 given_time = "2025.08.13 21:00:00"
 
-The prediction input should be the 60 candles that end at given_time (inclusive or as you design it, but be explicit in your code). 
+The prediction input should be the 60 candles that end at given_time.
 The model should then output a length-10 array of class predictions for the next 10 hours immediately after given_time.
 
 4- The output must be realistic in that not all 10 forecast hours are labeled 1 or 2 — only actual reversal points should be labeled.
