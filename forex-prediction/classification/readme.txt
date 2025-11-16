@@ -1,9 +1,14 @@
 Please think long and hard.
 I am a developer and I program with Python in Jupyter. I want you to help me write a Forex time-series classification program.
 
-Goal: give the model WINDOW_SIZE = 60 unseen hourly candles and have the model predict trend reversal points for the next FORECAST_HORIZON = 10 hours immediately after the 60th candle.
+# --------------------------
+Goal
+# --------------------------
+give the model WINDOW_SIZE = 60 unseen hourly candles and have the model predict trend reversal points for the next FORECAST_HORIZON = 10 hours immediately after the 60th candle.
 The model must output class labels for each of the 10 forecast hours: 0 = no signal, 1 = buy, 2 = sell.
+In this 10-hour window, there should be at least one and at most two trend reversal points, and the rest should be zero.
 Only actual reversal points should be labeled 1 or 2 (most forecast steps should be 0).
+
 
 # --------------------------
 Data (training dataset)
@@ -50,24 +55,8 @@ given_time = "2025.08.13 21:00:00"
 The prediction input should be the 60 candles that end at given_time.
 The model should then output a length-10 array of class predictions for the next 10 hours immediately after given_time.
 
-4- Since trend-reversal labels (1 and 2) are much rare compared to label 0, use code similar to the following to handle class imbalance:
 
-# Create sample weights for training
-sample_weights = np.ones_like(y_train, dtype=np.float32)
-
-for i in range(len(y_train)):
-    for j in range(FORECAST_HORIZON):
-        label = int(y_train[i, j])
-        if label == 0:
-            sample_weights[i, j] = 0.1  # Lower weight for no-signal
-        elif label == 1:
-            sample_weights[i, j] = 10.0  # Very high weight for buy signals
-        elif label == 2:
-            sample_weights[i, j] = 10.0  # Very high weight for sell signals
-
-
-
-5- At the end of the prediction section your code must provide a DataFrame named predicted_df and return / show it as the last line. 
+4- At the end of the prediction section your code must provide a DataFrame named predicted_df and return / show it as the last line.
 predicted_df should include at least the forecast DATETIME for each of the 10 steps, the predicted class, and optionally predicted probabilities for each class.
 
 # --------------------------
@@ -78,8 +67,8 @@ Deliverable (when you write the code)
 
 * A PREDICTION section that:
 
-	- Prepares the 60-candle input (scaling/feature selection) from df_model using given_time.
+	- Prepares the 60-candle input from df ( not from df_model ) using given_time.
 	- Runs the model to predict probabilities and classes for the next 10 hours.
-	- Produces predicted_df as the last line of code. predicted_df must contain DATETIME (10 rows), 		forecast_class, and optionally prob_0, prob_1, prob_2.
+	- Produces predicted_df as the last line of code. predicted_df must contain DATETIME (10 rows),
+	- forecast_class, and optionally prob_0, prob_1, prob_2.
 
-* Keep training/architecture choices, class-imbalance handling, and evaluation considerations sensible and commented.
