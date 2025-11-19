@@ -1,17 +1,19 @@
 Please think long and hard.
-I am a developer and I program with Python in Jupyter. I want you to help me write a Forex time-series classification program.
+I am a developer and I program with Python in Jupyter.
+I want you to help me write a Forex time-series classification program.
+I'm building a Forex trend reversal classifier using 130,000 hours of historical data with pre-labeled reversal points.
 
 # --------------------------
 Goal
 # --------------------------
-give the model WINDOW_SIZE = 60 unseen hourly candles and have the model predict trend reversal points for the next FORECAST_HORIZON = 10 hours immediately after the 60th candle.
-The model must output class labels for each of the 10 forecast hours: 0 = no signal, 1 = buy, 2 = sell.
-In this 10-hour window, there should be at least one and at most two trend reversal points, and the rest should be zero.
-Only actual reversal points should be labeled 1 or 2 (most forecast steps should be 0).
-
+The dataset contains a "Label" column with trend reversal classifications:
+0, 1, and 2.
+The model must learn the patterns that indicate trend reversal points and accurately reproduce this labeling behavior on unseen data.
+Given 60 consecutive unseen hourly candles, the model should predict trend reversal points (0, 1, 2) for the next 10 hours immediately following the 60th candle.
+Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 
 # --------------------------
-Data (training dataset)
+Dataset:
 # --------------------------
 
 * DataFrame name: df_model
