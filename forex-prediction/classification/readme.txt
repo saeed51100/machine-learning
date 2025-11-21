@@ -16,21 +16,16 @@ Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 Dataset:
 # --------------------------
 
-* DataFrame name: df_model
-* Rows: ~130,000 (continuous hourly series; gaps from holidays already filled)
-* Columns (11 total), sample rows:
-
-DATETIME,DATE,TIME,OPEN,HIGH,LOW,CLOSE,TICKVOL,VOL,SPREAD,Label
-2008-11-28 00:00:00,NaN,NaN,10.36,10.36,10.32,10.33,0.0,0.0,0.0,0
-2008-11-28 01:00:00,NaN,NaN,10.36,10.36,10.32,10.33,0.0,0.0,0.0,0
-2008-11-28 02:00:00,2008.11.28,02:00:00,10.32,10.33,10.30,10.30,10.0,0.0,0.0,0
-...
-
-
-* DATETIME is continuous (index-like).
-
-* Label column contains trend reversal points: 0, 1, 2.
-The model should learn to reproduce this labeling.
+1- The df dataset has 140,000 rows and 10 columns: DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD
+2- The timeframe is one hour, with each row representing one hourly candle.
+3- The df dataset is continuous with Forex market holiday gaps already filled.
+4- The DATETIME clumn is continuous and serves as the time index.
+5- I have copied the first 130,000 rows from df into df_model and added a 'Label' column to it. The 'Label' column contains trend reversal points labeled as 0 (no reversal), 1 (buy reversal), or 2 (sell reversal).
+6- I use df_model (130,000 rows) for training, testing, and validation.
+7- The remaining 10,000 rows of df (rows 130,001 to 140,000) represent completely unseen data and will be used to test the model's real-world prediction capability.
+8- In the df_model Label column, the distribution is approximately: [98.55%] are class 0, [0.73%] are class 1, and [0.73%] are class 2.
+9- When using df_model for train/test/validation, use chronological splitting: [SPECIFY: e.g., 'first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
+10- Our goal is to reproduce the 'Label' column for unseen data.
 
 # --------------------------
 Features and hyperparameters (must be used)
