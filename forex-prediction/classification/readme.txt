@@ -47,21 +47,15 @@ FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 Requirements for the code you will write (MODEL + PREDICTION)
 # --------------------------
 
-1- Use df_model as the training dataset (it is already preprocessed/continuous).
+1- Build an efficient, effective classification model that predicts reversal points (0/1/2) over the 10-hour horizon given the last 60 hourly candles.
 
-2- Build an efficient, effective classification model that predicts reversal points (0/1/2) over the 10-hour horizon given the last 60 hourly candles.
-
-3- The prediction pipeline must take a given_time from df ( not from df_model ) wich identifies the last available candle.
-I have already prepared df which has a structure similar to df_model and 60 unseen candles are selected from it.
-
-Use the specific given_time below for prediction tests:
+2- Use the specific given_time below for prediction tests:
 given_time = "2025.08.13 21:00:00"
 
 The prediction input should be the 60 candles that end at given_time.
 The model should then output a length-10 array of class predictions for the next 10 hours immediately after given_time.
 
-
-4- At the end of the prediction section your code must provide a DataFrame named predicted_df and return / show it as the last line.
+3- At the end of the prediction section your code must provide a DataFrame named predicted_df and return / show it as the last line.
 predicted_df should include at least the forecast DATETIME for each of the 10 steps, the predicted class, and optionally predicted probabilities for each class.
 
 # --------------------------
