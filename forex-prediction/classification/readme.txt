@@ -26,7 +26,15 @@ Dataset:
 8- In the df_model Label column, the distribution is approximately: [98.55%] are class 0, [0.73%] are class 1, and [0.73%] are class 2.
 9- When using df_model for train/test/validation, use chronological splitting: [SPECIFY: e.g., 'first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
 10- Our goal is to reproduce the 'Label' column for unseen data.
+11- The Label column in df_model was created algorithmically using a multi-stage filter that identifies:
 
+    - Local extrema on a smoothed price curve (31-hour Savitzky-Golay filter)
+    - Snapped to true HIGH/LOW within ±5 hours
+    - Filtered to keep only swings ≥0.15% price move AND ≥2× local volatility
+    - Enforced alternation between peaks (label 2) and valleys (label 1)
+    - Minimum 3-hour spacing between consecutive reversals
+
+    This produces high-confidence trend reversal points where meaningful directional changes occur.
 # --------------------------
 Features and hyperparameters (must be used)
 # --------------------------
