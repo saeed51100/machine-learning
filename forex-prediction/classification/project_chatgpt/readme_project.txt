@@ -23,6 +23,7 @@ Dataset:
 6- I use df_model (130,000 rows) for training, testing, and validation.
 7- The remaining 10,000 rows of df (rows 130,001 to 140,000) represent completely unseen data and will be used to test the model's real-world prediction capability.
 8- In the df_model Label column, the distribution is approximately: [98.55%] are class 0, [0.73%] are class 1, and [0.73%] are class 2.
+    Class weights alone do not work for >98% imbalance.You must implement additional strategies for class imbalance.
 9- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
 10- Our goal is to reproduce the 'Label' column for unseen data.
 11- The Label column in df_model was created algorithmically using a multi-stage filter that identifies:
