@@ -1,4 +1,8 @@
 Please think long and hard.
+
+# --------------------------
+Overview
+# --------------------------
 I am a developer and I program with Python in Jupyter.
 I want you to help me write a Forex time-series classification program.
 I'm building a Forex trend reversal classifier using 130,000 hours of historical data with pre-labeled reversal points.
@@ -13,7 +17,7 @@ Given 60 consecutive unseen hourly candles, the model should predict trend rever
 Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 
 # --------------------------
-Dataset:
+Dataset
 # --------------------------
 
 1- The df dataset has 140,000 rows and 10 columns: DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD
