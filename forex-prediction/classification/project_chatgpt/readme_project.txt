@@ -1,6 +1,7 @@
 I am a developer and I program with Python in Jupyter.
 I want you to help me write a Forex time-series classification program.
 I'm building a Forex trend reversal classifier using 130,000 hours of historical data with pre-labeled reversal points.
+Please write the codes for me in a canvas.
 
 # --------------------------
 Goal
@@ -23,9 +24,8 @@ Dataset:
 6- I use df_model (130,000 rows) for training, testing, and validation.
 7- The remaining 10,000 rows of df (rows 130,001 to 140,000) represent completely unseen data and will be used to test the model's real-world prediction capability.
 8- In the df_model Label column, the distribution is approximately: [98.55%] are class 0, [0.73%] are class 1, and [0.73%] are class 2.
-    Class weights alone do not work for >98% imbalance.You must implement additional strategies for class imbalance.
-9- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
-10- Our goal is to reproduce the 'Label' column for unseen data.
+9- Class weights alone do not work for >98% imbalance.You must implement additional strategies for class imbalance.
+10- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
 11- The Label column in df_model was created algorithmically using a multi-stage filter that identifies:
 
     - Local extrema on a smoothed price curve (31-hour Savitzky-Golay filter)
@@ -35,6 +35,8 @@ Dataset:
     - Minimum 3-hour spacing between consecutive reversals
 
     This produces high-confidence trend reversal points where meaningful directional changes occur.
+12- Our goal is to reproduce the 'Label' column for unseen data.
+
 # --------------------------
 Features and hyperparameters (must be used)
 # --------------------------
