@@ -1,0 +1,121 @@
+
+================================================================================
+MODEL TRAINING REPORT
+================================================================================
+Timestamp: 20251127_112150
+Model Path: saved_models/model_20251127_112150.keras
+Scaler Path: saved_models/scaler_20251127_112150.pkl
+
+================================================================================
+DATA CONFIGURATION
+================================================================================
+Total Samples in df_model: 146,356
+
+Training Samples: 68,746 (47.0%)
+Validation Samples: 14,677 (10.0%)
+Test Samples: 14,678 (10.0%)
+
+CLASS DISTRIBUTION:
+Training Set:
+  - Class 0 (No Signal): 98.20%
+  - Class 1 (Buy Reversal): 0.88%
+  - Class 2 (Sell Reversal): 0.92%
+
+Validation Set:
+  - Class 0 (No Signal): 97.47%
+  - Class 1 (Buy Reversal): 1.27%
+  - Class 2 (Sell Reversal): 1.27%
+
+Test Set:
+  - Class 0 (No Signal): 97.65%
+  - Class 1 (Buy Reversal): 1.19%
+  - Class 2 (Sell Reversal): 1.16%
+
+FEATURE CONFIGURATION:
+Features Used: OPEN, HIGH, LOW, CLOSE, TICKVOL
+Window Size: 60 hours
+Forecast Horizon: 10 hours
+
+================================================================================
+TRAINING CONFIGURATION
+================================================================================
+Optimizer: Adam (initial lr=0.001)
+Loss Function: Categorical Crossentropy
+Batch Size: 64
+Early Stopping: patience=15, monitor=val_loss
+Reduce LR: patience=7, factor=0.5
+
+CLASS WEIGHTS (for handling imbalance):
+  Class 0: 0.3394
+  Class 1: 37.8766
+  Class 2: 36.2012
+
+TRAINING PROGRESS:
+Epochs Trained: 2 / 100
+Best Validation Loss Epoch: 2
+
+================================================================================
+MODEL ARCHITECTURE
+================================================================================
+Total Parameters: 1,022,622
+Trainable Parameters: 1,021,214
+
+================================================================================
+OVERALL METRICS
+================================================================================
+Final Training Loss: 3.209145
+Final Training Accuracy: 0.287505
+Final Validation Loss: 3.786431
+Final Validation Accuracy: 0.012659
+
+================================================================================
+PER-CLASS PERFORMANCE (Validation Set)
+================================================================================
+                     precision    recall  f1-score   support
+
+Class 0 (No Signal)     0.0000    0.0000    0.0000    143050
+      Class 1 (Buy)     0.0128    0.2124    0.0241      1860
+     Class 2 (Sell)     0.0126    0.7866    0.0248      1860
+
+           accuracy                         0.0127    146770
+          macro avg     0.0085    0.3330    0.0163    146770
+       weighted avg     0.0003    0.0127    0.0006    146770
+
+
+================================================================================
+CONFUSION MATRIX (Validation Set)
+================================================================================
+                Predicted
+              Class 0  Class 1  Class 2
+Actual Class 0       0     30067    112983
+       Class 1       0       395      1465
+       Class 2       0       397      1463
+
+================================================================================
+MINORITY CLASS ANALYSIS
+================================================================================
+Class 1 (Buy Reversal):
+  Total Instances: 1860
+  Correctly Predicted: 395
+  Missed (False Negatives): 1465
+  False Positives: 30464
+
+Class 2 (Sell Reversal):
+  Total Instances: 1860
+  Correctly Predicted: 1463
+  Missed (False Negatives): 397
+  False Positives: 114448
+
+================================================================================
+FILES SAVED
+================================================================================
+- Model: model_20251127_112150.keras
+- Scaler: scaler_20251127_112150.pkl
+- Training History: training_history.csv
+- Training Loss Plot: training_loss.png
+- Training Accuracy Plot: training_accuracy.png
+- Confusion Matrix: confusion_matrix.png
+- Per-Class Metrics: per_class_metrics.png
+- This Report: comprehensive_report.txt
+
+================================================================================
