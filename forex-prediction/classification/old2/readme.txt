@@ -28,10 +28,10 @@ Dataset
 6- I use df_model (130,000 rows) for training, testing, and validation.
 7- The remaining 10,000 rows of df (rows 130,001 to 140,000) represent completely unseen data and will be used to test the model's real-world prediction capability.
 8- In the df_model Label column, the distribution is approximately: [98.55%] are class 0, [0.73%] are class 1, and [0.73%] are class 2.
-9- Class weights alone do not work for >98% imbalance.You must implement additional strategies for class imbalance.
-10- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
-11- Our goal is to reproduce the 'Label' column for unseen data.
+9- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
+10- Our goal is to reproduce the 'Label' column for unseen data.
 
+    This produces high-confidence trend reversal points where meaningful directional changes occur.
 # --------------------------
 Features and hyperparameters (must be used)
 # --------------------------
@@ -41,10 +41,30 @@ FORECAST_HORIZON = 10
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 
 # --------------------------
+Requirements for the code you will write (MODEL + PREDICTION)
+# --------------------------
+
+1- Build an efficient, effective classification model that predicts reversal points (0/1/2) over the 10-hour horizon given the last 60 hourly candles.
+
+2- Use the specific given_time below for prediction tests:
+given_time = "2025.08.13 21:00:00"
+
+The prediction input should be the 60 candles that end at given_time.
+The model should then output a length-10 array of class predictions for the next 10 hours immediately after given_time.
+
+3- At the end of the prediction section your code must provide a DataFrame named predicted_df and return / show it as the last line.
+predicted_df should include at least the forecast DATETIME for each of the 10 steps, the predicted class, and optionally predicted probabilities for each class.
+
+# --------------------------
 Deliverable (when you write the code)
 # --------------------------
 
-*  Build an efficient, effective classification model that predicts reversal points (0/1/2) over the 10-hour horizon given after the last 60 hourly unseen candles. (you may use TensorFlow/Keras).
-    - Just write me the code for the model section: "MODEL SECTION";I have already written the "PREDICTION" and "VISUALATION" sections.
+* A MODEL section that builds/trains (or defines/loading procedure for) a trained model suitable for this classification task (you may use TensorFlow/Keras; make clear training choices).
 
+* A PREDICTION section that:
+
+	- Prepares the 60-candle input from df ( not from df_model ) using given_time.
+	- Runs the model to predict probabilities and classes for the next 10 hours.
+	- Produces predicted_df as the last line of code. predicted_df must contain DATETIME (10 rows),
+	- forecast_class, and optionally prob_0, prob_1, prob_2.
 
