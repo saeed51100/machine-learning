@@ -24,7 +24,7 @@ Dataset
 2- The timeframe is hourly; each row is one hourly candle.
 3- The df dataset is continuous with Forex market holiday gaps already filled.
 4- The DATETIME column is continuous and serves as the time index.
-5- I copied the first 130,000 rows from df into df_model and added a 'Label' column to it. The 'Label' column contains trend reversal points labeled as 0 (no reversal), 1 (buy reversal), or 2 (sell reversal).
+5- I copied the first 130,000 rows from df into df_model and added a 'Label' column to it. The 'Label' column contains trend-reversal labels (0, 1, 2)..
 6- I will use df_model (130,000 rows) for training, testing, and validation.
 7- The remaining 10,000 rows of df (rows 130,001 to 140,000) are completely unseen and will be reserved for real-world testing.
 8- Label distribution in df_model is highly imbalanced: [98.55%] are class 0, [0.73%] are class 1, and [0.73%] are class 2.
