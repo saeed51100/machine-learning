@@ -13,7 +13,7 @@ Goal
 The dataset contains a "Label" column with trend-reversal classes:
 0, 1, and 2.
 The model should learn patterns that indicate reversal points and reproduce this labeling on unseen data.
-Given 60 consecutive unseen hourly candles, the model must predict trend reversal points (0, 1, 2) for the next 10 hours immediately following the 60th candle.
+Given 64 consecutive unseen hourly candles, the model must predict trend reversal points (0, 1, 2) for the next 10 hours immediately following the 64th candle.
 Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 
 # --------------------------
@@ -36,7 +36,7 @@ Dataset
 Features and hyperparameters (must be used)
 # --------------------------
 
-WINDOW_SIZE = 60
+WINDOW_SIZE = 64
 FORECAST_HORIZON = 10
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 
@@ -49,7 +49,7 @@ Deliverable
 	1- "CHRONOLOGICAL SPLITTING" - split df_model into train/validation/test sets chronologically.
 	2- "SCALING DATA" - normalize/standardize the feature data appropriately for time-series (fit on train only).
 	3- "IMBALANCE HANDLING" - address the severe class imbalance using appropriate techniques.
-	4- "SEQUENCE CREATION" - create sliding windows (X with shape [samples, 60, 5] and y with shape [samples, 10]).
+	4- "SEQUENCE CREATION" - create sliding windows (X with shape [samples, 64, 5] and y with shape [samples, 10]).
 
 * I will write the MODEL, TRAINING, PREDICTION, and VISUALIZATION sections later.
 
