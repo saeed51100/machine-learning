@@ -52,6 +52,3 @@ Deliverable
 	4- "SEQUENCE CREATION" - create sliding windows (X with shape [samples, 64, 5] and y with shape [samples, 10]).
 
 * I will write the MODEL, TRAINING, PREDICTION, and VISUALIZATION sections later.
-
-
-
