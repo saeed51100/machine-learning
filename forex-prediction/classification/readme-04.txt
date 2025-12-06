@@ -13,7 +13,7 @@ Goal
 The dataset contains a "Label" column with trend-reversal classes:
 0, 1, and 2.
 The model should learn patterns that indicate reversal points and reproduce this labeling on unseen data.
-Given 64 consecutive unseen hourly candles, the model must predict trend reversal points (0, 1, 2) for the next 10 hours immediately following the 64th candle.
+Given 120 consecutive unseen hourly candles, the model must predict trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
 Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 
 # --------------------------
@@ -36,8 +36,8 @@ Dataset
 Features and hyperparameters (must be used)
 # --------------------------
 
-WINDOW_SIZE = 64
-FORECAST_HORIZON = 10
+WINDOW_SIZE = 120
+FORECAST_HORIZON = 5
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 
 # --------------------------
