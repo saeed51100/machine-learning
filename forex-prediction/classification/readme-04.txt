@@ -61,8 +61,8 @@ Deliverable
     All earlier sections are already completed.
 
     You must prepare only the following part:
-
     3 — CHRONOLOGICAL SPLITTING
+
     Write the code that:
 
     Splits df_model chronologically into:
