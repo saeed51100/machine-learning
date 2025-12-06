@@ -57,29 +57,29 @@ All sections
 Deliverable
 # --------------------------
 
-You do not need to write all previous sections.
-All earlier sections are already completed.
+    You do not need to write all previous sections.
+    All earlier sections are already completed.
 
-You must prepare only the following part:
+    You must prepare only the following part:
 
-3 — CHRONOLOGICAL SPLITTING
-Write the code that:
+    3 — CHRONOLOGICAL SPLITTING
+    Write the code that:
 
-Splits df_model chronologically into:
-Training set (first 70%)
-Validation set (next 15%)
-Test set (final 15%)
+    Splits df_model chronologically into:
+    Training set (first 70%)
+    Validation set (next 15%)
+    Test set (final 15%)
 
-Uses strict time-order, with no shuffling.
+    Uses strict time-order, with no shuffling.
 
-Prints a clean summary report at the end, showing:
+    Prints a clean summary report at the end, showing:
 
-Number of samples in each split
-Start and end DATETIME of each split
-Percentage sizes (70/15/15)
-Label distribution in each split (counts and percentages)
+    Number of samples in each split
+    Start and end DATETIME of each split
+    Percentage sizes (70/15/15)
+    Label distribution in each split (counts and percentages)
 
-This printed report will be used as the input for designing the next question.
+    This printed report will be used as the input for designing the next question.
 
 
 
