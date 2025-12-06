@@ -57,8 +57,29 @@ All sections
 Deliverable
 # --------------------------
 
-    The previous sections are complete. You only need to prepare the following section:
-    3-"CHRONOLOGICAL SPLITTING" - split df_model into train/validation/test sets chronologically.
+You do not need to write all previous sections.
+All earlier sections are already completed.
+
+You must prepare only the following part:
+
+3 — CHRONOLOGICAL SPLITTING
+Write the code that:
+
+Splits df_model chronologically into:
+Training set (first 70%)
+Validation set (next 15%)
+Test set (final 15%)
+
+Uses strict time-order, with no shuffling.
+
+Prints a clean summary report at the end, showing:
+
+Number of samples in each split
+Start and end DATETIME of each split
+Percentage sizes (70/15/15)
+Label distribution in each split (counts and percentages)
+
+This printed report will be used as the input for designing the next question.
 
 
 
