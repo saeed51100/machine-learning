@@ -79,7 +79,10 @@ Deliverable
     Percentage sizes (70/15/15)
     Label distribution in each split (counts and percentages)
 
+------------------------------------------------------------------------------------------------------------------
     This printed report will be used as the input for designing the next question.
+    The report should be clean and concise.
+    The report should include the names of the variables so that I can use them in designing the next question.
 
 
 
