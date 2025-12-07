@@ -52,6 +52,9 @@ All sections
     7- Build the model
     8- Train the model
     9- Run predictions
+    10- Visualization
+    11- Save trained model, scaler and summary
+    12- Load trained model, scaler and summary
 
 # --------------------------
 Deliverable
@@ -79,10 +82,12 @@ Deliverable
     Percentage sizes (70/15/15)
     Label distribution in each split (counts and percentages)
 
-------------------------------------------------------------------------------------------------------------------
-    This printed report will be used as the input for designing the next question.
-    The report should be clean and concise.
-    The report should include the names of the variables so that I can use them in designing the next question.
-
+--------------------------------
+Additional Requirements:
+    • The printed report must be clean and concise.
+    • The report must explicitly include the variable names.
+    • The report must be printed directly in the notebook (plain text output).
+    • No Markdown formatting, no external text files.
+    • This printed report will be used as input for designing the next question.
 
 
