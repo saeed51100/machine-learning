@@ -84,10 +84,6 @@ Deliverable
 
 --------------------------------
 Additional Requirements:
-    • At the end of each section I need a clean and concise report that will be used as input to design the next section.
+    • At the end of section, I need a clean and concise report that will be used as input to design the next section.
     • The report must explicitly include the variable names.
-    • The report must be printed directly in the notebook (plain text output).
-    • No Markdown formatting, no external text files.
-
-
-
+    • The report must be printed directly in the notebook using plain text output (no Markdown formatting, no external text files).
