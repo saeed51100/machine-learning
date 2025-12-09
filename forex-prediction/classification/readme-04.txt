@@ -87,6 +87,6 @@ Deliverable
 
 --------------------------------
 Additional Requirements:
-    • At the end of section, I need a clean and concise report that will be used as input to design the fourth section (SCALING DATA).
+    • At the end of section, I need information that will be used as input to design the fourth section (SCALING DATA).
     • The report must explicitly include the variable names.
     • The report must be printed directly in the notebook using plain text output (no Markdown formatting, no external text files).
