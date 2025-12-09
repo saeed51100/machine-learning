@@ -87,6 +87,4 @@ Deliverable
 
 --------------------------------
 Additional Requirements:
-    • At the end of section, I need information that will be used as input to design the fourth section (SCALING DATA).
-    • This information must explicitly include the variable names.
-    • This information must be printed directly in the notebook using plain text output.
+    • At the end of this section, print all variable names that will be required as inputs for Section 4 (SCALING DATA).
