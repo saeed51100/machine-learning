@@ -1,0 +1,41 @@
+========== MODEL PERFORMANCE REPORT ==========
+
+Timestamp: 20251210_062707
+
+Model file: model_20251210_062707.keras
+
+
+--- Validation Metrics ---
+
+Validation Loss: 0.164033
+
+Validation Accuracy: 0.977268
+
+
+--- Classification Report (Flattened Horizon) ---
+
+              precision    recall  f1-score   support
+
+           0       0.98      1.00      0.99    107131
+           1       0.01      0.00      0.00      1005
+           2       0.06      0.01      0.02      1004
+
+    accuracy                           0.98    109140
+   macro avg       0.35      0.34      0.34    109140
+weighted avg       0.96      0.98      0.97    109140
+
+
+--- Class Distribution in Validation (Flattened) ---
+
+{np.int64(0): np.int64(107131), np.int64(1): np.int64(1005), np.int64(2): np.int64(1004)}
+
+
+--- Files Saved ---
+
+Training loss plot: saved_models/model_20251210_062707_logs/training_loss.png
+
+Training accuracy plot: saved_models/model_20251210_062707_logs/training_accuracy.png
+
+Confusion matrix: saved_models/model_20251210_062707_logs/confusion_matrix.png
+
+Per-class performance plot: saved_models/model_20251210_062707_logs/per_class_performance.png
