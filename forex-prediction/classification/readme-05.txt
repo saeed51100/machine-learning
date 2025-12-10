@@ -60,14 +60,18 @@ All sections
     12- Load trained model, scaler and summary
 
 # --------------------------
+Workflow
+# --------------------------
+I want to proceed through the project interactively.
+For each of the 12 sections listed above, I will request the code step-by-step.
+You must write the requested code in a canvas, and each time I request the next section, you will append a new section to the same canvas without modifying previous sections.
+
+# --------------------------
 Deliverable
 # --------------------------
 
-    You do not need to write all previous sections.
+    Please write me the code for part 3 (CHRONOLOGICAL SPLITTING).
     All earlier sections are already completed.
-
-    You must prepare only the following part:
-    3 — CHRONOLOGICAL SPLITTING
 
     Write the code that:
 
@@ -78,13 +82,3 @@ Deliverable
 
     Uses strict time-order, with no shuffling.
 
-    Prints a clean summary report at the end, showing:
-
-    Number of samples in each split
-    Start and end DATETIME of each split
-    Percentage sizes (70/15/15)
-    Label distribution in each split (counts and percentages)
-
---------------------------------
-Additional Requirements:
-    • At the end of this section, print all variable names that will be required as inputs for Section 4 (SCALING DATA).
