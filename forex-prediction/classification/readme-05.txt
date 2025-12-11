@@ -61,25 +61,10 @@ All sections
     13- Load trained model, scaler and summary
 
 # --------------------------
-Workflow
-# --------------------------
-I want to proceed through the project interactively.
-For each of the 12 sections listed above, I will request the code step-by-step.
-You must write the requested code in a canvas, and each time I request the next section, you will append a new section to the same canvas without modifying previous sections.
-
-# --------------------------
 Deliverable
 # --------------------------
 
-    Please write me the code for part 3 (CHRONOLOGICAL SPLITTING).
+    Please write me the codes for part 3 and 4 and 5.
     All earlier sections are already completed.
 
-    Write the code that:
-
-    Splits df_model chronologically into:
-    Training set (first 70%)
-    Validation set (next 15%)
-    Test set (final 15%)
-
-    Uses strict time-order, with no shuffling.
 
