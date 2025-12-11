@@ -40,9 +40,9 @@ FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 Your task
 --------------------------
 Write the full code for:
-Chronological splitting of df_model
-Scaling using only training data
-Imbalance handling (class weights + any additional method appropriate for >98% class imbalance)
+    3- Chronological splitting of df_model
+    4- Scaling using only training data
+    5- Imbalance handling (class weights + any additional method appropriate for >98% class imbalance)
 Earlier sections (loading df + creating df_model) are already complete.
 
 --------------------------
