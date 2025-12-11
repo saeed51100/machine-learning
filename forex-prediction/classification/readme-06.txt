@@ -4,14 +4,14 @@ Please think long and hard.
 Overview
 --------------------------
 I am building a Forex time-series classification model in Python/Jupyter.
-The goal is to detect trend-reversal points using 130,000 hours of labeled historical data.
+The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
 
 --------------------------
 Goal
 --------------------------
 The model must:
-Use 120 past candles to predict 5 future labels (0=no signal, 1=buy reversal, 2=sell reversal).
-Reproduce the "Label" column on unseen data.
+    - Use 120 past candles to predict 5 future labels (0=no signal, 1=buy reversal, 2=sell reversal).
+    - The task is to reproduce the "Label" column on unseen data.
 
 --------------------------
 Dataset
