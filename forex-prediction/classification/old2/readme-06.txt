@@ -37,13 +37,21 @@ FORECAST_HORIZON = 5
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 
 --------------------------
+Completed Steps (1–2)
+--------------------------
+I have done the following steps:
+1- Load df
+2- Create df_model from df and add the 'label' column
+
+
+--------------------------
 Your task
 --------------------------
 Write the full code for:
     3- Chronological splitting of df_model
     4- Scaling using only training data
-    5- Imbalance handling (class weights + any additional method appropriate for >98% class imbalance)
-Earlier sections (loading df + creating df_model) are already complete.
+
+At the end of the code, print the variables required for part 5 (Imbalance handling).
 
 --------------------------
 Deliverable
