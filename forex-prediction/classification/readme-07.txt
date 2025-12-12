@@ -50,12 +50,11 @@ All sections
     4- SCALING DATA
     5- IMBALANCE HANDLING
     6- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
-    7- Build the model
-    8- Train the model
-    9- Run predictions
-    10- Visualization
-    11- Save trained model, scaler and summary
-    12- Load trained model, scaler and summary
+    7- Build, Train and Evaluate the model
+    8- Run predictions
+    9- Visualization
+    10- Save trained model, scaler and summary
+    11- Load trained model, scaler and summary
 
 --------------------------
 Completed sections (1–2)
