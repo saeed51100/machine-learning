@@ -9,25 +9,30 @@ The goal is to detect trend-reversal points using 130,000 hours of labeled histo
 --------------------------
 Goal
 --------------------------
-The model must:
-    - Use 120 past candles to predict 5 future labels (0=no signal, 1=buy reversal, 2=sell reversal).
-    - The task is to reproduce the "Label" column on unseen data.
+The dataset contains a "Label" column with trend-reversal classes:
+0, 1, and 2.
+The model should learn patterns that indicate reversal points and reproduce this labeling on unseen data.
+Given 120 consecutive unseen hourly candles, the model must predict trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
+Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 
 --------------------------
 Dataset
 --------------------------
 
-df has 140,000 rows, columns:
-DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD
-Hourly timeframe (H1), fully continuous.
-First 130,000 rows → df_model, with an added Label column (0/1/2).
-Rows 130,001–140,000 are completely unseen test data.
-Labels are highly imbalanced:
-class 0: 98.55%
-class 1: 0.73%
-class 2: 0.73%
-
-Must use chronological splitting for train/val/test (70/15/15 or walk-forward).
+1- The DataFrame (df) has 140,000 rows and 10 columns: DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD
+2- The timeframe is H1 (hourly); each row is one hour of Forex OHLCV data.
+3- The dataset is fully continuous, with all holiday gaps already forward-filled.
+4- The DATETIME column is strictly chronological and represents the true time index.
+5- I copied the first 130,000 rows from df into df_model and added a 'Label' column to it. The 'Label' column contains trend-reversal labels (0, 1, 2).
+6- I will use df_model (130,000 rows) for training, testing, and validation.
+7- The remaining 10,000 rows of df (rows 130,001 to 140,000) are completely unseen and will be reserved for real-world testing.
+8- The label distribution in df_model is highly imbalanced:
+    - Class 0 ≈ 98.55%
+    - Class 1 ≈ 0.73%
+    - Class 2 ≈ 0.73%
+9- Because imbalance is extremely high (>98%), class weights alone are insufficient; additional imbalance-handling strategies are required.
+10- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
+11- The final goal is to reproduce the 'Label' column for unseen data.
 
 --------------------------
 Required hyperparameters
@@ -36,18 +41,34 @@ WINDOW_SIZE = 120
 FORECAST_HORIZON = 5
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 
+# --------------------------
+All sections
+# --------------------------
+    1- Load df
+    2- Create df_model from df and add the 'label' column
+    3- CHRONOLOGICAL SPLITTING
+    4- SCALING DATA
+    5- IMBALANCE HANDLING
+    6- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
+    7- Build the model
+    8- Train the model
+    9- Run predictions
+    10- Visualization
+    11- Save trained model, scaler and summary
+    12- Load trained model, scaler and summary
+
+--------------------------
+Completed sections (1–2)
+--------------------------
+I have done the following steps:
+    1- Load df
+    2- Create df_model from df and add the 'label' column
+
 --------------------------
 Your task
 --------------------------
-Write the full code for:
+Write the full code only for the following parts:
     3- Chronological splitting of df_model
     4- Scaling using only training data
-    5- Imbalance handling (class weights + any additional method appropriate for >98% class imbalance)
-Earlier sections (loading df + creating df_model) are already complete.
-
---------------------------
-Deliverable
---------------------------
-
-Provide clean, complete Python code for parts 3, 4, and 5 only.
+At the end of the code, print the variables required for part 5 (Imbalance handling).
 
