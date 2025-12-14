@@ -1,0 +1,530 @@
+Please think long and hard.
+I am building a Forex time-series classification model in Python/Jupyter.
+The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
+--------------------------
+Goal
+--------------------------
+The dataset contains a "Label" column with trend-reversal classes:
+0, 1, and 2.
+The model should learn patterns that indicate reversal points and reproduce this labeling on unseen data.
+Given 120 consecutive unseen hourly candles, the model must predict trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
+Classes: 0=no signal, 1=buy reversal, 2=sell reversal
+--------------------------
+The label distribution in df_model is highly imbalanced:
+    - Class 0 ≈ 98.55%
+    - Class 1 ≈ 0.73%
+    - Class 2 ≈ 0.73%
+
+--------------------------
+I have written the following code. Please read it carefully and give me some advice to improve it.
+
+// my code:
+# --------------------------
+# Part 3 — Chronological splitting (70% train, 15% val, 15% test)
+# --------------------------
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.utils.class_weight import compute_class_weight
+
+WINDOW_SIZE = 120
+FORECAST_HORIZON = 5
+FEATURES = ['OPEN', 'HIGH', 'LOW', 'CLOSE', 'TICKVOL']
+BATCH_SIZE = 256
+
+# Safety checks
+assert 'df_model' in globals(), "df_model is not defined. Please load df_model before running this cell."
+assert all(feat in df_model.columns for feat in FEATURES), f"Not all FEATURES found in df_model columns: {FEATURES}"
+assert 'Label' in df_model.columns, "df_model must contain a 'Label' column."
+
+# Ensure chronological order by DATETIME (robustness)
+if 'DATETIME' in df_model.columns:
+    df_model = df_model.copy()
+    df_model['DATETIME'] = pd.to_datetime(df_model['DATETIME'])
+    df_model = df_model.sort_values('DATETIME', ascending=True).reset_index(drop=True)
+
+# Basic meta
+n_rows = len(df_model)
+print(f"Total rows in df_model: {n_rows}")
+
+# Chronological split boundaries
+train_end = int(np.floor(0.70 * n_rows))
+val_end = int(np.floor(0.85 * n_rows))  # 70% -> 85% -> 100%
+
+# Slice datasets (pure chronological, no shuffling)
+train_df = df_model.iloc[:train_end].reset_index(drop=True)
+val_df = df_model.iloc[train_end:val_end].reset_index(drop=True)
+test_df = df_model.iloc[val_end:].reset_index(drop=True)
+
+#%%
+# Part 4 — Scaling using only training data (StandardScaler)
+# At the end we print variables useful for Part 5 (Imbalance handling)
+# --- Prepare arrays of features for scaler and later sequence building ---
+
+X_train_raw = train_df[FEATURES].astype(float).copy()  # DataFrame
+X_val_raw = val_df[FEATURES].astype(float).copy()
+X_test_raw = test_df[FEATURES].astype(float).copy()
+
+# --- Fit scaler on training features ONLY ---
+scaler = StandardScaler()
+scaler.fit(X_train_raw.values)  # fit on numpy array from training set only
+
+# Transform all splits using the training-fitted scaler
+X_train_scaled = scaler.transform(X_train_raw.values)  # numpy array shape (n_train, n_features)
+X_val_scaled = scaler.transform(X_val_raw.values)
+X_test_scaled = scaler.transform(X_test_raw.values)
+
+# If user later wants DataFrames back (with same columns), create them:
+X_train_scaled_df = pd.DataFrame(X_train_scaled, columns=FEATURES)
+X_val_scaled_df = pd.DataFrame(X_val_scaled, columns=FEATURES)
+X_test_scaled_df = pd.DataFrame(X_test_scaled, columns=FEATURES)
+
+# --- Label arrays for imbalance handling (these are per-row labels) ---
+y_train_labels = train_df['Label'].astype(int).values
+y_val_labels = val_df['Label'].astype(int).values
+y_test_labels = test_df['Label'].astype(int).values
+
+# --- Basic class distribution info (useful for imbalance handling) ---
+unique_classes = np.array(sorted(df_model['Label'].dropna().unique())).astype(int)
+
+train_class_counts = {int(c): int((y_train_labels == c).sum()) for c in unique_classes}
+val_class_counts = {int(c): int((y_val_labels == c).sum()) for c in unique_classes}
+test_class_counts = {int(c): int((y_test_labels == c).sum()) for c in unique_classes}
+
+train_total = len(y_train_labels)
+val_total = len(y_val_labels)
+test_total = len(y_test_labels)
+
+train_class_percent = {c: (count / train_total) * 100.0 for c, count in train_class_counts.items()}
+
+# --- Compute initial class weights (sklearn balanced weighting) on the training labels
+# This gives a starting point; given extreme imbalance you will likely combine resampling + weights.
+classes_for_weights = np.array(sorted(np.unique(y_train_labels)))
+class_weights = compute_class_weight(class_weight='balanced', classes=classes_for_weights, y=y_train_labels)
+class_weight_dict = {int(cls): float(w) for cls, w in zip(classes_for_weights, class_weights)}
+
+
+# For convenience, also expose them in the current namespace (no-op if already present)
+_train_idx = (0, train_end)
+_val_idx = (train_end, val_end)
+_test_idx = (val_end, n_rows)
+
+# End of this code cell — ready for Part 5.
+
+#%%
+# -----------------------------
+# PART 5 — IMBALANCE HANDLING
+# -----------------------------
+# Place parameters here so you can manage imbalance handling behavior easily.
+IMBALANCE_STRATEGY = "combined"  # options: "none", "class_weight", "oversample", "undersample", "smote", "combined"
+RANDOM_STATE = 42
+# Only used for undersampling the majority class (0). Fraction of majority to KEEP (0-1).
+MAJORITY_KEEP_FRAC = 0.5
+# After undersampling, SMOTE will upsample minority classes to reach this relative proportion of the
+# (new) majority class. e.g. minority_target_ratio = 0.5 -> each minority class will be ~50% of majority.
+MINORITY_TARGET_RATIO = 0.6
+
+# NOTE (important): resampling is applied ONLY to the TRAIN split. Validation and test splits remain unchanged.
+# Also: resampling breaks chronological ordering inside the training set. That is usually acceptable for models
+# that only learn patterns (not for models where the exact chronology of training samples matters). You already
+# performed chronological splitting; we keep val/test untouched.
+
+import numpy as np
+import pandas as pd
+from collections import Counter
+from sklearn.utils.class_weight import compute_class_weight
+
+# Try to import imblearn; if not available, fallback to sklearn.utils.resample for simple oversampling/undersampling.
+try:
+    from imblearn.over_sampling import SMOTE, RandomOverSampler
+    from imblearn.under_sampling import RandomUnderSampler
+
+    IMBLEARN_AVAILABLE = True
+except Exception:
+    IMBLEARN_AVAILABLE = False
+    from sklearn.utils import resample
+
+# -----------------------------
+# Prepare training arrays from existing variables
+# -----------------------------
+# Expectations (you said these exist earlier):
+# - train_df (pandas DataFrame) with a 'Label' column for training slice
+# - X_train_scaled, X_val_scaled, X_test_scaled: numpy arrays of scaled features (train/val/test)
+# - scaler: fitted scaler instance (kept for later parts)
+# If your variable names differ, adapt below accordingly.
+
+# create y_train_labels from train_df
+y_train_labels = train_df['Label'].astype(int).to_numpy()
+# make sure X_train_scaled is a numpy array
+X_train_scaled = np.asarray(X_train_scaled)
+X_val_scaled = np.asarray(X_val_scaled)
+X_test_scaled = np.asarray(X_test_scaled)
+
+# Create a DataFrame view of scaled train features (useful later and requested)
+# FEATURES list is provided in your global hyperparameters
+try:
+    X_train_scaled_df = pd.DataFrame(X_train_scaled, columns=FEATURES)
+except Exception:
+    # if shape mismatch or column names not matching, fallback to generic column names
+    n_feats = X_train_scaled.shape[1]
+    X_train_scaled_df = pd.DataFrame(X_train_scaled, columns=[f"f{i}" for i in range(n_feats)])
+
+# Compute and print initial train class counts
+train_class_counts = dict(Counter(y_train_labels))
+print("Initial TRAIN class counts:", train_class_counts)
+
+# Compute sklearn balanced class weights (reference)
+classes = np.unique(y_train_labels)
+class_weight_vals = compute_class_weight(class_weight="balanced", classes=classes, y=y_train_labels)
+class_weight_dict = {int(c): float(w) for c, w in zip(classes, class_weight_vals)}
+print("Initial computed class_weight (sklearn 'balanced'):", class_weight_dict)
+
+# Prepare placeholders for resampled outputs
+X_train_resampled = X_train_scaled.copy()
+y_train_resampled = y_train_labels.copy()
+sample_weight_train_resampled = None
+
+# -----------------------------
+# Implement strategies
+# -----------------------------
+if IMBALANCE_STRATEGY == "none":
+    # Do nothing — just use the original training arrays
+    print("IMBALANCE_STRATEGY = 'none' -> no resampling performed. Using original training data.")
+
+elif IMBALANCE_STRATEGY == "class_weight":
+    # Do not change the training set; use class weights at training time.
+    print("IMBALANCE_STRATEGY = 'class_weight' -> no resampling performed. Use class weights during model.fit().")
+
+elif IMBALANCE_STRATEGY in ("oversample", "undersample", "smote", "combined"):
+    print(f"IMBALANCE_STRATEGY = '{IMBALANCE_STRATEGY}' -> performing resampling on TRAIN only.")
+    # If imblearn available, use its resamplers for better behavior. Otherwise fall back to manual resampling.
+    if IMBLEARN_AVAILABLE:
+        # Build index array so we can easily map back if needed
+        train_idx = np.arange(len(y_train_labels))
+
+        if IMBALANCE_STRATEGY == "oversample":
+            ros = RandomOverSampler(random_state=RANDOM_STATE)
+            X_train_resampled, y_train_resampled = ros.fit_resample(X_train_scaled, y_train_labels)
+            print("RandomOverSampler completed.")
+
+        elif IMBALANCE_STRATEGY == "undersample":
+            # Reduce majority class (0) to MAJORITY_KEEP_FRAC of its original count while keeping minorities intact.
+            # Create sampling_strategy dict for RandomUnderSampler
+            maj_count = train_class_counts.get(0, 0)
+            target_maj = max(1, int(maj_count * MAJORITY_KEEP_FRAC))
+            sampling_strategy = {0: target_maj}
+            # keep other classes as-is (imblearn will remove entries only for classes in sampling_strategy)
+            rus = RandomUnderSampler(sampling_strategy=sampling_strategy, random_state=RANDOM_STATE)
+            X_train_resampled, y_train_resampled = rus.fit_resample(X_train_scaled, y_train_labels)
+            print("RandomUnderSampler completed. New TRAIN counts:", dict(Counter(y_train_resampled)))
+
+        elif IMBALANCE_STRATEGY == "smote":
+            # SMOTE can be unstable with extremely imbalanced data; we will first undersample majority a little, then SMOTE.
+            maj_count = train_class_counts.get(0, 0)
+            target_maj = max(1, int(maj_count * MAJORITY_KEEP_FRAC))
+            # Step 1: undersample majority to make SMOTE viable
+            rus = RandomUnderSampler(sampling_strategy={0: target_maj}, random_state=RANDOM_STATE)
+            X_tmp, y_tmp = rus.fit_resample(X_train_scaled, y_train_labels)
+            # Step 2: SMOTE to balance minorities relative to the new majority
+            # Build sampling_strategy for SMOTE: set each minority to MINORITY_TARGET_RATIO * target_maj
+            sampling_strategy_smote = {}
+            for cls, _ in Counter(y_tmp).items():
+                if cls == 0:
+                    continue
+                sampling_strategy_smote[int(cls)] = int(max(1, target_maj * MINORITY_TARGET_RATIO))
+            sm = SMOTE(sampling_strategy=sampling_strategy_smote, random_state=RANDOM_STATE)
+            X_train_resampled, y_train_resampled = sm.fit_resample(X_tmp, y_tmp)
+            print("SMOTE (with initial undersample) completed. New TRAIN counts:", dict(Counter(y_train_resampled)))
+
+        elif IMBALANCE_STRATEGY == "combined":
+            # Combined strategy: undersample majority to MAJORITY_KEEP_FRAC, then SMOTE minority classes up to
+            # MINORITY_TARGET_RATIO of the new majority class.
+            maj_count = train_class_counts.get(0, 0)
+            target_maj = max(1, int(maj_count * MAJORITY_KEEP_FRAC))
+
+            # 1) Undersample majority
+            rus = RandomUnderSampler(sampling_strategy={0: target_maj}, random_state=RANDOM_STATE)
+            X_tmp, y_tmp = rus.fit_resample(X_train_scaled, y_train_labels)
+            print("Step 1: Undersample majority done. Counts:", dict(Counter(y_tmp)))
+
+            # 2) SMOTE -> target minority counts relative to new majority
+            sampling_strategy_smote = {}
+            for cls in np.unique(y_tmp):
+                if int(cls) == 0:
+                    continue
+                sampling_strategy_smote[int(cls)] = int(max(1, target_maj * MINORITY_TARGET_RATIO))
+
+            # If sampling_strategy_smote would result in fewer minority samples than already present, set to 'auto'
+            # to avoid trying to downsample with SMOTE (which cannot downsample).
+            # Build final smote strategy only for classes where desired > present
+            final_smote_strategy = {}
+            for cls, desired in sampling_strategy_smote.items():
+                present = Counter(y_tmp).get(cls, 0)
+                if desired > present:
+                    final_smote_strategy[cls] = desired
+
+            if len(final_smote_strategy) == 0:
+                # Nothing to SMOTE; keep undersampled version
+                X_train_resampled, y_train_resampled = X_tmp, y_tmp
+                print("No SMOTE required after undersampling (minorities already at/above target).")
+            else:
+                sm = SMOTE(sampling_strategy=final_smote_strategy, random_state=RANDOM_STATE)
+                X_train_resampled, y_train_resampled = sm.fit_resample(X_tmp, y_tmp)
+                print("Step 2: SMOTE completed. New TRAIN counts:", dict(Counter(y_train_resampled)))
+        else:
+            raise ValueError("Unsupported IMBALANCE_STRATEGY with imblearn.")
+
+    else:
+        # imblearn not available — fallback to simpler resampling using sklearn.utils.resample
+        print("imblearn not installed. Falling back to simple resampling with sklearn.utils.resample. "
+              "This is less flexible for SMOTE, so only basic oversample/undersample are available.")
+        if IMBALANCE_STRATEGY == "oversample":
+            # naive oversample minority classes to match majority count (not ideal but workable)
+            df_train_tmp = pd.DataFrame(X_train_scaled)
+            df_train_tmp['Label'] = y_train_labels
+            majority_class = df_train_tmp[df_train_tmp['Label'] == 0]
+            majority_count = len(majority_class)
+            resampled_parts = [majority_class]
+            for cls in np.unique(y_train_labels):
+                if cls == 0:
+                    continue
+                cls_df = df_train_tmp[df_train_tmp['Label'] == cls]
+                upsampled = resample(cls_df, replace=True, n_samples=majority_count, random_state=RANDOM_STATE)
+                resampled_parts.append(upsampled)
+            df_res = pd.concat(resampled_parts).sample(frac=1, random_state=RANDOM_STATE).reset_index(drop=True)
+            y_train_resampled = df_res['Label'].to_numpy()
+            X_train_resampled = df_res.drop(columns=['Label']).to_numpy()
+            print("Fallback oversample completed. New TRAIN counts:", dict(Counter(y_train_resampled)))
+
+        elif IMBALANCE_STRATEGY == "undersample":
+            df_train_tmp = pd.DataFrame(X_train_scaled)
+            df_train_tmp['Label'] = y_train_labels
+            majority_class = df_train_tmp[df_train_tmp['Label'] == 0]
+            target_maj = int(len(majority_class) * MAJORITY_KEEP_FRAC)
+            majority_down = resample(majority_class, replace=False, n_samples=target_maj, random_state=RANDOM_STATE)
+            others = df_train_tmp[df_train_tmp['Label'] != 0]
+            df_res = pd.concat([majority_down, others]).sample(frac=1, random_state=RANDOM_STATE).reset_index(drop=True)
+            y_train_resampled = df_res['Label'].to_numpy()
+            X_train_resampled = df_res.drop(columns=['Label']).to_numpy()
+            print("Fallback undersample completed. New TRAIN counts:", dict(Counter(y_train_resampled)))
+
+        else:
+            raise RuntimeError("Requested strategy requires imblearn but it's not installed. "
+                               "Install 'imblearn' to use SMOTE or combined strategies.")
+
+else:
+    raise ValueError(f"Unknown IMBALANCE_STRATEGY: {IMBALANCE_STRATEGY}")
+
+# -----------------------------
+# After resampling: compute sample weights (useful in model.fit if you want per-sample weighting)
+# -----------------------------
+# Compute class weights on the resampled training set (so the model still sees higher weight for minority if desired)
+resampled_classes = np.unique(y_train_resampled)
+resampled_class_weight_vals = compute_class_weight(class_weight="balanced", classes=resampled_classes,
+                                                   y=y_train_resampled)
+resampled_class_weight_dict = {int(c): float(w) for c, w in zip(resampled_classes, resampled_class_weight_vals)}
+print("Resampled TRAIN class counts:", dict(Counter(y_train_resampled)))
+print("Resampled computed class_weight (sklearn 'balanced'):", resampled_class_weight_dict)
+
+# Build per-sample weights array for the resampled training set (useful if you want to pass sample_weight to model.fit)
+sample_weight_train_resampled = np.array([resampled_class_weight_dict[int(lbl)] for lbl in y_train_resampled],
+                                         dtype=float)
+
+
+#%%
+# Part 6 — Create sequences (WINDOW_SIZE -> X, FORECAST_HORIZON -> y)
+
+
+# --- Helper: sliding-window sequence creator for one split ---
+def create_sequences_from_split(X_split, y_split, window_size, forecast_horizon):
+    """
+    X_split: 2D array (n_rows, n_features)
+    y_split: 1D array (n_rows,) integer labels
+    Returns:
+      X_seq: (n_sequences, window_size, n_features)
+      y_seq: (n_sequences, forecast_horizon) ints
+    """
+    X_arr = np.asarray(X_split)
+    y_arr = np.asarray(y_split)
+
+    if X_arr.ndim != 2:
+        raise ValueError(f"X_split must be 2D array, got shape {X_arr.shape}")
+    if y_arr.ndim != 1:
+        raise ValueError(f"y_split must be 1D array, got shape {y_arr.shape}")
+    if X_arr.shape[0] != y_arr.shape[0]:
+        raise ValueError(f"X and y must have same first-dimension length. X: {X_arr.shape[0]}, y: {y_arr.shape[0]}")
+
+    n_rows = X_arr.shape[0]
+    last_start = n_rows - window_size - forecast_horizon  # inclusive max start index
+    if last_start < 0:
+        # Not enough rows to construct a single sequence
+        return np.empty((0, window_size, X_arr.shape[1])), np.empty((0, forecast_horizon), dtype=int)
+
+    n_sequences = last_start + 1
+    X_seq = np.empty((n_sequences, window_size, X_arr.shape[1]), dtype=X_arr.dtype)
+    y_seq = np.empty((n_sequences, forecast_horizon), dtype=int)
+
+    for i in range(n_sequences):
+        X_seq[i] = X_arr[i: i + window_size]
+        y_seq[i] = y_arr[i + window_size: i + window_size + forecast_horizon]
+
+    return X_seq, y_seq
+
+
+# --- Create sequences for each split ---
+X_train_seq, y_train_seq = create_sequences_from_split(X_train_scaled, y_train_labels, WINDOW_SIZE, FORECAST_HORIZON)
+X_val_seq, y_val_seq = create_sequences_from_split(X_val_scaled, y_val_labels, WINDOW_SIZE, FORECAST_HORIZON)
+X_test_seq, y_test_seq = create_sequences_from_split(X_test_scaled, y_test_labels, WINDOW_SIZE, FORECAST_HORIZON)
+
+# --- One-hot encode multi-step labels ---
+# Determine number of classes from training labels (safe default: 3 classes {0,1,2})
+classes_in_train = np.unique(y_train_seq) if y_train_seq.size > 0 else np.array([0, 1, 2])
+n_classes = int(max(classes_in_train.max(), 2) + 1)  # ensures at least 3 classes (0..2)
+
+
+# Convert to categorical: result shape (n_sequences, FORECAST_HORIZON, n_classes)
+def one_hot_multi_step(y_seq, n_classes):
+    if y_seq.size == 0:
+        return np.empty((0, y_seq.shape[1], n_classes), dtype=np.float32)
+    # to_categorical works on flattened array, then reshape
+    flat = to_categorical(y_seq.ravel(), num_classes=n_classes)
+    return flat.reshape((y_seq.shape[0], y_seq.shape[1], n_classes))
+
+
+y_train_seq_cat = one_hot_multi_step(y_train_seq, n_classes)
+y_val_seq_cat = one_hot_multi_step(y_val_seq, n_classes)
+y_test_seq_cat = one_hot_multi_step(y_test_seq, n_classes)
+
+
+# --- Useful diagnostics and prints required for Part 7 ---
+def seq_stats(X_seq, y_seq, name):
+    print(f"--- {name} ---")
+    print(f"X_{name}_seq.shape: {X_seq.shape}")
+    print(f"y_{name}_seq.shape: {y_seq.shape}")
+    if y_seq.size > 0:
+        flattened = y_seq.ravel()
+        unique, counts = np.unique(flattened, return_counts=True)
+        dist = dict(zip([int(u) for u in unique], [int(c) for c in counts]))
+        total = flattened.size
+        print(f"Label distribution across all forecast positions (counts): {dist}")
+        print("Label distribution (percent):", {int(u): round(c / total * 100, 4) for u, c in zip(unique, counts)})
+    else:
+        print("No sequences (empty).")
+    print()
+
+
+seq_stats(X_train_seq, y_train_seq, "train")
+seq_stats(X_val_seq, y_val_seq, "val")
+seq_stats(X_test_seq, y_test_seq, "test")
+
+
+#%%
+# Part 7 — Build, Train and Evaluate the model
+
+
+from sklearn.metrics import classification_report, confusion_matrix
+
+# Basic checks
+print("X_train_seq shape:", X_train_seq.shape)
+print("y_train_seq_cat shape:", y_train_seq_cat.shape)
+print("X_val_seq shape:", X_val_seq.shape)
+print("X_test_seq shape:", X_test_seq.shape)
+
+N_CLASSES = y_train_seq_cat.shape[-1]  # should be 3
+TIMESTEPS = y_train_seq_cat.shape[1]  # should be FORECAST_HORIZON
+
+# ---------------------------
+# Create timestep-aware sample weights to handle extreme imbalance
+# ---------------------------
+# Compute global class frequencies across all samples and timesteps in training set
+class_counts = np.sum(y_train_seq_cat, axis=(0, 1))  # shape (n_classes,)
+total_labels = np.sum(class_counts)
+print("Train class counts (sum across samples and timesteps):", class_counts)
+
+# Avoid division by zero
+eps = 1e-8
+# Inverse-frequency weighting (normalized)
+inv_freq = (total_labels / (class_counts + eps))
+# normalize so that mean weight == 1 (keeps loss scale stable)
+inv_freq = inv_freq / np.mean(inv_freq)
+print("Per-class inverse-frequency weights:", inv_freq)
+
+
+# Build sample_weight arrays with shape (n_samples, timesteps)
+def build_timestep_sample_weights(y_cat, inv_freq_array):
+    # y_cat shape: (n_samples, timesteps, n_classes)
+    n_samples, timesteps, n_classes = y_cat.shape
+    sw = np.zeros((n_samples, timesteps), dtype=np.float32)
+    # argmax to get the true class index per sample/timestep
+    true_classes = np.argmax(y_cat, axis=-1)  # shape (n_samples, timesteps)
+    for c in range(n_classes):
+        sw[true_classes == c] = inv_freq_array[c]
+    return sw
+
+
+sample_weight_train = build_timestep_sample_weights(y_train_seq_cat, inv_freq)
+sample_weight_val = build_timestep_sample_weights(y_val_seq_cat, inv_freq)
+sample_weight_test = build_timestep_sample_weights(y_test_seq_cat, inv_freq)
+
+print("sample_weight_train shape:", sample_weight_train.shape)
+
+# ---------------------------
+# Build the model
+# Seq2Seq-ish model: Encoder LSTM -> RepeatVector -> Decoder LSTM (return_sequences=True) -> TimeDistributed(Dense)
+# ---------------------------
+INPUT_SHAPE = X_train_seq.shape[1:]  # (WINDOW_SIZE, n_features)
+EMBED_DIM = 128
+ENC_UNITS = 128
+DEC_UNITS = 128
+DROPOUT = 0.2
+
+inputs = layers.Input(shape=INPUT_SHAPE, name='inputs')
+# optional masking if there are padded sequences; here probably not needed but harmless
+x = layers.Masking(mask_value=0.0)(inputs)
+# Encoder
+x = layers.Bidirectional(layers.LSTM(ENC_UNITS, return_sequences=False, dropout=DROPOUT), name='encoder_bi')(x)
+# Project to embedding
+x = layers.Dense(EMBED_DIM, activation='relu', name='encoder_dense')(x)
+# Repeat for forecast horizon
+x = layers.RepeatVector(TIMESTEPS, name='repeat_vector')(x)
+# Decoder
+x = layers.LSTM(DEC_UNITS, return_sequences=True, dropout=DROPOUT, name='decoder_lstm')(x)
+# Optional TimeDistributed intermediate dense
+x = layers.TimeDistributed(layers.Dense(64, activation='relu'), name='td_dense')(x)
+# Final classification per timestep
+outputs = layers.TimeDistributed(layers.Dense(N_CLASSES, activation='softmax'), name='td_softmax')(x)
+
+model = models.Model(inputs=inputs, outputs=outputs, name='seq2seq_reversal_classifier')
+model.summary()
+#%%
+# ---------------------------
+# Compile
+# ---------------------------
+LR = 1e-3
+optimizer = optimizers.Adam(learning_rate=LR)
+loss = tf.keras.losses.CategoricalCrossentropy()
+model.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
+
+# ---------------------------
+# Callbacks
+# ---------------------------
+
+es = callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True, verbose=1)
+reduce_lr = callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=5, verbose=1)
+
+# ---------------------------
+# Fit
+# Note: sample_weight for sequence outputs should be shape (n_samples, timesteps)
+# ---------------------------
+
+history = model.fit(
+    X_train_seq,
+    y_train_seq_cat,
+    validation_data=(X_val_seq, y_val_seq_cat, sample_weight_val),
+    epochs=200,
+    batch_size=BATCH_SIZE,
+    callbacks=[es, reduce_lr],
+    sample_weight=sample_weight_train,
+    verbose=2
+)
+
+print("\nTRAINING COMPLETE!")
