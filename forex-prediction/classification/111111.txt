@@ -19,7 +19,7 @@ The label distribution in df_model is highly imbalanced:
     - Class 2 ≈ 0.73%
 
 --------------------------
-My request:
+Question:
 --------------------------
 I have written the following code.
 Please review my code and identify the single most important problem, then suggest how to fix it.
