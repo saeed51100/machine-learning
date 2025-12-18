@@ -18,6 +18,6 @@ So far, I have completed the following steps:
 2- Scaling using only training data
 
 * My question:
-Is it appropriate to use the imbalanced-learn library to handle class imbalance in a time-series classification problem?
-
+1- Is it appropriate to use the imbalanced-learn library to handle class imbalance in a time-series classification problem?
 Specifically, does applying resampling methods (such as over-sampling or under-sampling) destroy the temporal sequence or introduce data leakage?
+2- What is the best approach to imbalance handling in time series problems?
