@@ -1,29 +1,10 @@
 Please think long and hard.
-I am building a Forex time-series classification model in Python/Jupyter.
-The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
---------------------------
-Goal
---------------------------
-The dataset contains a "Label" column with trend-reversal classes:
-0, 1, and 2.
-The model should learn patterns that indicate reversal points and reproduce this labeling on unseen data.
-Given 120 consecutive unseen hourly candles, the model must predict trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
-Classes: 0=no signal, 1=buy reversal, 2=sell reversal
+I want to request the necessary codes for an application from chatgpt.
+This application consists of 4 main parts.
+In order for me to use the maximum processing power of chatgpt, I want to request the codes for each part separately in separate and independent chats.
+I have written these questions and I am sharing them with you below.
+My question:
+In each of the following questions, which sentences are unnecessary and can I delete them?
 
---------------------------
-Additional information:
---------------------------
-The label distribution in df_model is highly imbalanced:
-    - Class 0 ≈ 98.55%
-    - Class 1 ≈ 0.73%
-    - Class 2 ≈ 0.73%
-
---------------------------
-Question:
---------------------------
-I have written the following code.
-Please review my code and identify the single most important problem, then suggest how to fix it.
-
-// my code:
 
 
