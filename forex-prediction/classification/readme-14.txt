@@ -63,24 +63,12 @@ All sections
 Completed sections (1–4)
 --------------------------
 I have done the following steps:
-    1- Load df
-    2- Create df_model from df and add the 'label' column
-    3- CHRONOLOGICAL SPLITTING
-    4- SCALING DATA
-    5- IMBALANCE HANDLING
+
 
 --------------------------
 VARIABLES (ready for PART 6: Create sequences)
 --------------------------
-=== VARIABLES (ready for PART 6) ===
-y_train_labels.shape: (102449,)
-train_class_counts (original): {np.int64(2): 670, np.int64(0): 101109, np.int64(1): 670}
-class_weight_dict (original): {0: 0.3377510079880789, 1: 50.96965174129353, 2: 50.96965174129353}
-X_train_scaled.shape: (102449, 5)
-X_val_scaled.shape: (21953, 5)
-X_test_scaled.shape: (21954, 5)
-X_train_scaled_df.shape: (102449, 5)
-scaler object type: <class 'sklearn.preprocessing._data.StandardScaler'>
+
 
 
 --------------------------

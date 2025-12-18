@@ -47,82 +47,26 @@ FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 # --------------------------
 All sections
 # --------------------------
-    1- Load df
-    2- Create df_model from df and add the 'label' column
-    3- CHRONOLOGICAL SPLITTING
-    4- SCALING DATA
-    5- IMBALANCE HANDLING
-    6- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
-    7- Build, Train and Evaluate the model
-    8- Run predictions
-    9- Visualization
-    10- Save trained model, scaler and summary
-    11- Load trained model, scaler and summary
+
 
 --------------------------
 Completed sections (1–4)
 --------------------------
 I have done the following steps:
-    1- Load df
-    2- Create df_model from df and add the 'label' column
-    3- CHRONOLOGICAL SPLITTING
-    4- SCALING DATA
+
 
 --------------------------
-Variables & summaries for Part 5 (Imbalance handling)
+VARIABLES (ready for PART 6: Create sequences)
 --------------------------
 
-1) Split indices (chronological slice positions):
-   train_end index: 102449
-   val_end   index: 124402
 
-2) Shapes of splits:
-   train_df shape: (102449, 11)
-   val_df   shape: (21953, 11)
-   test_df  shape: (21954, 11)
-
-3) Label distribution (counts) in TRAIN set:
-   Class 0: 101109 samples (98.692032%)
-   Class 1: 670 samples (0.653984%)
-   Class 2: 670 samples (0.653984%)
-   -> Total training samples = 102449
-
-4) Label distribution (counts) in VAL set:
-   Class 0: 21548 samples
-   Class 1: 202 samples
-   Class 2: 203 samples
-   -> Total validation samples = 21953
-
-5) Label distribution (counts) in TEST set:
-   Class 0: 21572 samples
-   Class 1: 191 samples
-   Class 2: 191 samples
-   -> Total test samples = 21954
-
-6) Initial class_weight (sklearn 'balanced') computed from TRAIN labels:
-   Class 0: weight = 0.337751
-   Class 1: weight = 50.969652
-   Class 2: weight = 50.969652
-   (These are a starting reference; with extreme imbalance you'll likely need resampling + specialized losses.)
-
-7) Objects/arrays you will likely need for Part 5:
-   - y_train_labels           (numpy array of training labels)
-   - train_class_counts       (dict of per-class counts in train)
-   - class_weight_dict        (dict of computed weights from sklearn)
-   - X_train_scaled           (numpy array of scaled training features, shape = (n_train, n_features))
-   - X_val_scaled             (numpy array of scaled val features)
-   - X_test_scaled            (numpy array of scaled test features)
-   - X_train_scaled_df        (pandas DataFrame of scaled train features)
-   - scaler                  (fitted StandardScaler instance)
 
 --------------------------
 Your task
 --------------------------
-Write the full code only part 5 (IMBALANCE HANDLING).
+Write the full code only part 6 (Create sequences).
 
 
     Additional Requirements:
-    - Because imbalance is extremely high (>98%), class weights alone are insufficient; additional imbalance-handling strategies are required.
-    - At the beginning of the code in this section, place a parameter or parameters so that I can manage the imbalance value by setting them.
-    - At the end of the code, print the variables required for part 6 (Create sequences).
+        - At the end of the code, print the variables required for part 7 (Build, Train and Evaluate the model).
 

@@ -46,41 +46,18 @@ FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 # --------------------------
 All sections
 # --------------------------
-    1- Load df
-    2- Create df_model from df and add the 'label' column
-    3- CHRONOLOGICAL SPLITTING
-    4- SCALING DATA
-    5- IMBALANCE HANDLING
-    6- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
-    7- Build, Train and Evaluate the model
-    8- Run predictions
-    9- Visualization
-    10- Save trained model, scaler and summary
-    11- Load trained model, scaler and summary
+
 
 --------------------------
 Completed sections (1–4)
 --------------------------
 I have done the following steps:
-    1- Load df
-    2- Create df_model from df and add the 'label' column
-    3- CHRONOLOGICAL SPLITTING
-    4- SCALING DATA
-    5- IMBALANCE HANDLING
-    6- Create sequences
+
 
 --------------------------
 Variables ready for Part 7 (Build, Train and Evaluate the model):
 --------------------------
-X_train_seq : (102325, 120, 5)
-y_train_seq : (102325, 5)
-y_train_seq_cat : (102325, 5, 3)
-X_val_seq   : (21829, 120, 5)
-y_val_seq   : (21829, 5)
-y_val_seq_cat   : (21829, 5, 3)
-X_test_seq  : (21830, 120, 5)
-y_test_seq  : (21830, 5)
-y_test_seq_cat  : (21830, 5, 3)
+
 
 
 --------------------------
