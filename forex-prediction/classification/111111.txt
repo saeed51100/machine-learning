@@ -4,7 +4,7 @@ This application consists of 4 main parts.
 In order for me to use the maximum processing power of chatgpt, I want to request the codes for each part separately in separate and independent chats.
 I have written these questions and I am sharing them with you below.
 My question:
-In each of the following questions, which sentences are unnecessary and can I delete them?
+Do you have an idea to improve the workflow?
 
 
 
