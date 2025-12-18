@@ -33,9 +33,8 @@ Dataset
     - Class 0 ≈ 98.55%
     - Class 1 ≈ 0.73%
     - Class 2 ≈ 0.73%
-9- Because imbalance is extremely high (>98%), class weights alone are insufficient; additional imbalance-handling strategies are required.
-10- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
-11- The final goal is to reproduce the 'Label' column for unseen data.
+9- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
+10- The final goal is to reproduce the 'Label' column for unseen data.
 
 --------------------------
 Required hyperparameters
@@ -47,30 +46,24 @@ FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 # --------------------------
 All sections
 # --------------------------
-    1- Load df
-    2- Create df_model from df and add the 'label' column
-    3- CHRONOLOGICAL SPLITTING
-    4- SCALING DATA
-    5- IMBALANCE HANDLING
-    6- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
-    7- Build, Train and Evaluate the model
-    8- Run predictions
-    9- Visualization
-    10- Save trained model, scaler and summary
-    11- Load trained model, scaler and summary
+    1- Create df_model from df and add the 'label' column
+    2- CHRONOLOGICAL SPLITTING
+    3- SCALING DATA
+    4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
+    5- IMBALANCE HANDLING ( Class-weighted )
+    6- Build, Train and Evaluate the model
 
 --------------------------
-Completed sections (1–2)
+Completed section: 1
 --------------------------
 I have done the following steps:
-    1- Load df
-    2- Create df_model from df and add the 'label' column
+    1- Create df_model from df and add the 'label' column
 
 --------------------------
 Your task
 --------------------------
 Write the full code only for the following parts:
-    3- Chronological splitting of df_model
-    4- Scaling using only training data
-At the end of the code, print the variables required for part 5 (Imbalance handling).
+    2- Chronological splitting of df_model
+    3- Scaling using only training data
+At the end of the code, print the variables required for part 4 (Create sequences).
 

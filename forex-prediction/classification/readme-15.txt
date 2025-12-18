@@ -34,23 +34,32 @@ FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 # --------------------------
 All sections
 # --------------------------
-
+    1- Create df_model from df and add the 'label' column
+    2- CHRONOLOGICAL SPLITTING
+    3- SCALING DATA
+    4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
+    5- IMBALANCE HANDLING ( Class-weighted )
+    6- Build, Train and Evaluate the model
 
 --------------------------
 Completed sections (1–4)
 --------------------------
 I have done the following steps:
-
+    1- Create df_model from df and add the 'label' column
+    2- CHRONOLOGICAL SPLITTING
+    3- SCALING DATA
+    4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
+    5- IMBALANCE HANDLING ( Class-weighted )
 
 --------------------------
 Variables ready for Part 7 (Build, Train and Evaluate the model):
 --------------------------
-
+...
 
 
 --------------------------
 Your task
 --------------------------
-Write the full code only part 7 ( Build, Train and Evaluate the model ).
+Write the full code only part 6 ( Build, Train and Evaluate the model ).
 
 
