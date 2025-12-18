@@ -63,7 +63,7 @@ I have done the following steps:
 
 
 --------------------------
-VARIABLES (ready for PART 4: Create sequences)
+VARIABLES FROM PREVIOUS PART (ready for PART 4: Create sequences)
 --------------------------
 ...
 

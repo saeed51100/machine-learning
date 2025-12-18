@@ -63,7 +63,7 @@ I have done the following steps:
     4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
 
 --------------------------
-VARIABLES (ready for PART 5: IMBALANCE HANDLING)
+VARIABLES FROM PREVIOUS PART (ready for PART 5: IMBALANCE HANDLING)
 --------------------------
 ...
 
@@ -73,7 +73,14 @@ Your task
 --------------------------
 Write the full code only part 5 (IMBALANCE HANDLING).
 
+    Imbalance Handling Rules:
 
-    Additional Requirements:
-        - At the end of the code, print the variables required for part 6 (Build, Train and Evaluate the model).
+       * Imbalance Handling Rules
+            - Do NOT use SMOTE, oversampling, undersampling, or row duplication
+            - Use class-weighted loss ONLY
+            - Compute weights from y_train_seq ONLY
+
+       * At the end of the code, the following variables MUST exist:
+            - class_weights (dict compatible with Keras)
+            - At the end of the code, print the variables required for part 6 (Build, Train and Evaluate the model).
 

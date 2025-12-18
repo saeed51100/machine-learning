@@ -64,7 +64,7 @@ I have done the following steps:
     5- IMBALANCE HANDLING ( Class-weighted )
 
 --------------------------
-Variables ready for Part 7 (Build, Train and Evaluate the model):
+VARIABLES FROM PREVIOUS PART ready for Part 7 (Build, Train and Evaluate the model):
 --------------------------
 ...
 
