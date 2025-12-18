@@ -3,7 +3,8 @@ Please think long and hard.
 --------------------------
 Overview
 --------------------------
-I am building a Forex time-series classification model in Python/Jupyter.
+This is PART 5 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
+You must assume that PARTS 1~4 are already completed correctly.
 The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
 
 --------------------------
