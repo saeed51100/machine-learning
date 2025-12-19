@@ -3,8 +3,8 @@ Please think long and hard.
 --------------------------
 Overview
 --------------------------
-This is PART 4 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
-You must assume that PARTS 1~3 are already completed correctly.
+This is PART 2-3 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
+You must assume that PARTS 1 are already completed correctly.
 The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
 
 --------------------------
@@ -22,6 +22,7 @@ Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 --------------------------
 Dataset
 --------------------------
+
 1- The DataFrame (df) has 140,000 rows and 10 columns: DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD
 2- The timeframe is H1 (hourly); each row is one hour of Forex OHLCV data.
 3- The dataset is fully continuous, with all holiday gaps already forward-filled.
@@ -35,7 +36,6 @@ Dataset
     - Class 2 ≈ 0.73%
 9- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
 10- The final goal is to reproduce the 'Label' column for unseen data.
-
 
 --------------------------
 Required hyperparameters
@@ -55,25 +55,16 @@ All sections
     6- Build, Train and Evaluate the model
 
 --------------------------
-Completed sections (1–3)
+Completed section: 1
 --------------------------
 I have done the following steps:
     1- Create df_model from df and add the 'label' column
-    2- CHRONOLOGICAL SPLITTING
-    3- SCALING DATA
-
-
---------------------------
-VARIABLES FROM PREVIOUS PART (ready for PART 4: Create sequences)
---------------------------
-...
-
 
 --------------------------
 Your task
 --------------------------
-Write the full code only part 4 (Create sequences).
-
-    Additional Requirements:
-        - At the end of the code, print the variables required for part 5 (IMBALANCE HANDLING).
+Write the full code only for the following parts:
+    2- Chronological splitting of df_model
+    3- Scaling using only training data
+At the end of the code, print the variables required for part 4 (Create sequences).
 

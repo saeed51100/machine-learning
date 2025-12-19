@@ -3,8 +3,8 @@ Please think long and hard.
 --------------------------
 Overview
 --------------------------
-This is PART 5 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
-You must assume that PARTS 1~4 are already completed correctly.
+This is PART 4 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
+You must assume that PARTS 1~3 are already completed correctly.
 The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
 
 --------------------------
@@ -55,16 +55,16 @@ All sections
     6- Build, Train and Evaluate the model
 
 --------------------------
-Completed sections (1–4)
+Completed sections (1–3)
 --------------------------
 I have done the following steps:
     1- Create df_model from df and add the 'label' column
     2- CHRONOLOGICAL SPLITTING
     3- SCALING DATA
-    4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
+
 
 --------------------------
-VARIABLES FROM PREVIOUS PART (ready for PART 5: IMBALANCE HANDLING)
+VARIABLES FROM PREVIOUS PART (ready for PART 4: Create sequences)
 --------------------------
 ...
 
@@ -72,16 +72,8 @@ VARIABLES FROM PREVIOUS PART (ready for PART 5: IMBALANCE HANDLING)
 --------------------------
 Your task
 --------------------------
-Write the full code only part 5 (IMBALANCE HANDLING).
+Write the full code only part 4 (Create sequences).
 
-    Imbalance Handling Rules:
-
-       * Imbalance Handling Rules
-            - Do NOT use SMOTE, oversampling, undersampling, or row duplication
-            - Use class-weighted loss ONLY
-            - Compute weights from y_train_seq ONLY
-
-       * At the end of the code, the following variables MUST exist:
-            - class_weights (dict compatible with Keras)
-            - At the end of the code, print the variables required for part 6 (Build, Train and Evaluate the model).
+    Additional Requirements:
+        - At the end of the code, print the variables required for part 5 (IMBALANCE HANDLING).
 
