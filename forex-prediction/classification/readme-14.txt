@@ -5,7 +5,7 @@ Overview
 --------------------------
 This is PART 4 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
 You must assume that PARTS 1~3 are already completed correctly.
-The goal is to detect trend-reversal points using 140,000 hours of labeled historical H1 data.
+The goal is to detect trend-reversal points of labeled historical H1 data.
 
 --------------------------
 Goal
