@@ -43,7 +43,7 @@ Required hyperparameters
 WINDOW_SIZE = 120
 FORECAST_HORIZON = 5
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
-df_model
+
 
 # --------------------------
 All parts
@@ -60,6 +60,11 @@ Completed part: 1
 --------------------------
 I have done the following part:
     1- Create df_model from df and add the 'label' column
+
+--------------------------
+VARIABLES FROM PREVIOUS PART (ready for PART 4: Create sequences)
+--------------------------
+df_model:
 
 --------------------------
 Your task

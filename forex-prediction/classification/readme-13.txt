@@ -62,6 +62,11 @@ I have done the following parts:
     2- Chronological splitting of df_model
 
 --------------------------
+VARIABLES FROM PREVIOUS PART (ready for PART 4: Create sequences)
+--------------------------
+...
+
+--------------------------
 Your task
 --------------------------
 Write the full code only for the following parts:
