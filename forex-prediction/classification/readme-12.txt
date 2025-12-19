@@ -64,7 +64,7 @@ I have done the following part:
 --------------------------
 VARIABLES FROM PREVIOUS PART (ready for PART 4: Create sequences)
 --------------------------
-df_model:
+df_model: (146356, 11)
 
 --------------------------
 Your task
