@@ -5,7 +5,7 @@ Overview
 --------------------------
 This is PART 2 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
 You must assume that PART 1 are already completed correctly.
-The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
+The goal is to detect trend-reversal points using 140,000 hours of labeled historical H1 data.
 
 --------------------------
 Goal
@@ -62,7 +62,7 @@ I have done the following part:
     1- Create df_model from df and add the 'label' column
 
 --------------------------
-VARIABLES FROM PREVIOUS PART (ready for PART 4: Create sequences)
+VARIABLES FROM PREVIOUS PART
 --------------------------
 df_model: (146356, 11)
 
@@ -72,5 +72,6 @@ Your task
 Write the full code only for the following part:
     2- Chronological splitting of df_model
 
-At the end of the code, print the variables required for part 4 (Create sequences).
+    * additional requirements:
+        At the end of the code, print the variables required for part 3 (Create sequences).
 

@@ -4,8 +4,8 @@ Please think long and hard.
 Overview
 --------------------------
 This is PART 3 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
-You must assume that PARTS 1 are already completed correctly.
-The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
+You must assume that PARTS 1-2 are already completed correctly.
+The goal is to detect trend-reversal points using 140,000 hours of labeled historical H1 data.
 
 --------------------------
 Goal
@@ -62,7 +62,7 @@ I have done the following parts:
     2- Chronological splitting of df_model
 
 --------------------------
-VARIABLES FROM PREVIOUS PART (ready for PART 4: Create sequences)
+VARIABLES FROM PREVIOUS PART
 --------------------------
 ...
 
@@ -72,5 +72,5 @@ Your task
 Write the full code only for the following parts:
     3- Scaling using only training data
 
-At the end of the code, print the variables required for part 4 (Create sequences).
-
+    * additional requirements:
+        At the end of the code, print the variables required for part 4 (Create sequences).

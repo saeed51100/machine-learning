@@ -5,7 +5,7 @@ Overview
 --------------------------
 This is PART 5 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
 You must assume that PARTS 1~4 are already completed correctly.
-The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
+The goal is to detect trend-reversal points using 140,000 hours of labeled historical H1 data.
 
 --------------------------
 Goal
@@ -55,7 +55,7 @@ All parts
     6- Build, Train and Evaluate the model
 
 --------------------------
-Completed parts (1–4)
+Completed parts (1~4)
 --------------------------
 I have done the following parts:
     1- Create df_model from df and add the 'label' column
@@ -64,7 +64,7 @@ I have done the following parts:
     4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
 
 --------------------------
-VARIABLES FROM PREVIOUS PART (ready for PART 5: IMBALANCE HANDLING)
+VARIABLES FROM PREVIOUS PART
 --------------------------
 ...
 
