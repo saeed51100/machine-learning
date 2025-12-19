@@ -3,8 +3,8 @@ Please think long and hard.
 --------------------------
 Overview
 --------------------------
-This is PART 2-3 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
-You must assume that PARTS 1 are already completed correctly.
+This is PART 2 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
+You must assume that PART 1 are already completed correctly.
 The goal is to detect trend-reversal points using 130,000 hours of labeled historical H1 data.
 
 --------------------------
@@ -43,9 +43,10 @@ Required hyperparameters
 WINDOW_SIZE = 120
 FORECAST_HORIZON = 5
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
+df_model
 
 # --------------------------
-All sections
+All parts
 # --------------------------
     1- Create df_model from df and add the 'label' column
     2- CHRONOLOGICAL SPLITTING
@@ -55,16 +56,16 @@ All sections
     6- Build, Train and Evaluate the model
 
 --------------------------
-Completed section: 1
+Completed part: 1
 --------------------------
-I have done the following steps:
+I have done the following part:
     1- Create df_model from df and add the 'label' column
 
 --------------------------
 Your task
 --------------------------
-Write the full code only for the following parts:
+Write the full code only for the following part:
     2- Chronological splitting of df_model
-    3- Scaling using only training data
+
 At the end of the code, print the variables required for part 4 (Create sequences).
 

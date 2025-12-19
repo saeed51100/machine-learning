@@ -45,7 +45,7 @@ FORECAST_HORIZON = 5
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 
 # --------------------------
-All sections
+All parts
 # --------------------------
     1- Create df_model from df and add the 'label' column
     2- CHRONOLOGICAL SPLITTING
@@ -55,9 +55,9 @@ All sections
     6- Build, Train and Evaluate the model
 
 --------------------------
-Completed sections (1–4)
+Completed parts (1–4)
 --------------------------
-I have done the following steps:
+I have done the following parts:
     1- Create df_model from df and add the 'label' column
     2- CHRONOLOGICAL SPLITTING
     3- SCALING DATA
