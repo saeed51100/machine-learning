@@ -59,7 +59,7 @@ All parts
     6- Build, Train and Evaluate the model
 
 --------------------------
-Completed parts (1~4)
+Completed parts (1-4)
 --------------------------
 I have done the following parts:
     1- Create df_model from df and add the 'label' column
