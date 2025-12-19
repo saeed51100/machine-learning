@@ -68,7 +68,7 @@ I have done the following part:
 --------------------------
 VARIABLES FROM PREVIOUS PART
 --------------------------
-df_model: (146356, 11)
+df_model
 
 --------------------------
 Your task
