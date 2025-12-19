@@ -26,7 +26,11 @@ Dataset
 2- The timeframe is H1 (hourly); each row is one hour of Forex OHLCV data.
 3- The dataset is fully continuous, with all holiday gaps already forward-filled.
 4- The DATETIME column is strictly chronological and represents the true time index.
-5- I copied the first 130,000 rows from df into df_model and added a 'Label' column to it. The 'Label' column contains trend-reversal labels (0, 1, 2).
+5- I copied the first 130,000 rows from df into df_model and added a 'Label' column to it.
+    The 'Label' column contains trend-reversal labels:
+        0: no reversal
+        1: bullish reversal
+        2: bearish reversal.
 6- I will use df_model (130,000 rows) for training, testing, and validation.
 7- The remaining 10,000 rows of df (rows 130,001 to 140,000) are completely unseen and will be reserved for real-world testing.
 8- The label distribution in df_model is highly imbalanced:
