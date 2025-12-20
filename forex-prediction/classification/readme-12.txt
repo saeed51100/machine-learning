@@ -80,5 +80,5 @@ Write the full code only for the following part:
     2- Chronological splitting of df_model
 
     * additional requirements:
-        At the end of the code, print the variables required for part 3 (Create sequences).
+        At the end of the code, print the variables required for part 3 (SCALING DATA).
 
