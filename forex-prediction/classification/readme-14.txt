@@ -54,7 +54,7 @@ FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 # --------------------------
 All Pipeline Parts
 # --------------------------
-    1- Create df_model from df and add the 'label' column
+    1- Create df_model from df and add the 'Label' column
     2- CHRONOLOGICAL SPLITTING
     3- SCALING DATA
     4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
@@ -65,7 +65,7 @@ All Pipeline Parts
 Completed parts (1-3)
 --------------------------
 I have done the following parts:
-    1- Create df_model from df and add the 'label' column
+    1- Create df_model from df and add the 'Label' column
     2- CHRONOLOGICAL SPLITTING
     3- SCALING DATA
 
