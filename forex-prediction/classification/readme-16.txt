@@ -81,5 +81,10 @@ VARIABLES FROM PREVIOUS PART
 Your task
 --------------------------
 Write the full code only part 6 ( Build, Train and Evaluate the model ).
+     Note:
+
+        class_weight is incompatible with sequence (multi-step) targets.
+        A custom loss function is required for time-distributed classification.
+        You must implement a weighted loss function to handle class imbalance.
 
 
