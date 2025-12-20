@@ -3,9 +3,9 @@ Please think long and hard.
 --------------------------
 Overview
 --------------------------
-This is PART 3 of a multi-part Forex time-series classification pipeline in Python/Jupyter.
-You must assume that PARTS 1-2 are already completed correctly.
-The goal is to detect trend-reversal points of labeled historical H1 data.
+This is PART 3 of a multi-part Forex time-series classification pipeline implemented in Python/Jupyter.
+You must assume that PARTS 1-2 are already been completed correctly.
+The overall goal is to detect trend-reversal points in labeled historical H1 Forex data.
 
 --------------------------
 Goal
@@ -22,24 +22,26 @@ Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 --------------------------
 Dataset
 --------------------------
-
 1- The DataFrame (df) has 140,000 rows and 10 columns: DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD
 2- The timeframe is H1 (hourly); each row is one hour of Forex OHLCV data.
 3- The dataset is fully continuous, with all holiday gaps already forward-filled.
 4- The DATETIME column is strictly chronological and represents the true time index.
-5- I copied the first 130,000 rows from df into df_model and added a 'Label' column to it.
+5- The first 130,000 rows of df were copied into df_model, and a 'Label' column was added.
     The 'Label' column contains trend-reversal labels:
         0: no reversal
         1: bullish reversal
         2: bearish reversal.
-6- I will use df_model (130,000 rows) for training, testing, and validation.
-7- The remaining 10,000 rows of df (rows 130,001 to 140,000) are completely unseen and will be reserved for real-world testing.
-8- The label distribution in df_model is highly imbalanced:
+6- df_model (130,000 rows) will be used for training, validation, and testing.
+7- The remaining 10,000 rows of df (rows 130,001 to 140,000) are completely unseen and reserved for real-world testing.
+8- Label distribution in df_model is highly imbalanced:
     - Class 0 ≈ 98.55%
     - Class 1 ≈ 0.73%
     - Class 2 ≈ 0.73%
-9- When using df_model for train/test/validation, use chronological splitting: ['first 70% for training, next 15% for validation, last 15% for testing' or 'walk-forward validation'].
-10- The final goal is to reproduce the 'Label' column for unseen data.
+9- When splitting df_model, strict chronological splitting must be used:
+    - Either 70% train / 15% validation / 15% test, or
+    - Walk-forward validation
+    - No shuffling is allowed
+10- The final objective is to reproduce the 'Label' column on unseen data.
 
 --------------------------
 Required hyperparameters
@@ -49,7 +51,7 @@ FORECAST_HORIZON = 5
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 
 # --------------------------
-All parts
+All Pipeline Parts
 # --------------------------
     1- Create df_model from df and add the 'label' column
     2- CHRONOLOGICAL SPLITTING
