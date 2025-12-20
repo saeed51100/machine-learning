@@ -62,7 +62,7 @@ All Pipeline Parts
     6- Build, Train and Evaluate the model
 
 --------------------------
-Completed parts (1-3)
+Completed parts
 --------------------------
 I have done the following parts:
     1- Create df_model from df and add the 'Label' column
