@@ -5,18 +5,18 @@ Overview
 --------------------------
 This is PART 3 of a multi-part Forex time-series classification pipeline implemented in Python/Jupyter.
 You must assume that PARTS 1-2 are already been completed correctly.
-The overall goal is to detect trend-reversal points in labeled historical H1 Forex data.
+The overall goal is to detect price trend-reversal points in labeled historical H1 Forex data.
 
 --------------------------
 Goal
 --------------------------
-The dataset contains a "Label" column with trend-reversal classes:
+The dataset contains a "Label" column with price trend-reversal classes:
 0: no reversal
 1: bullish reversal
 2: bearish reversal
 
 The model should learn patterns that indicate reversal points and reproduce this labeling on unseen data.
-Given 120 consecutive unseen hourly candles, the model must predict trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
+Given 120 consecutive unseen hourly candles, the model must predict price trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
 Classes: 0=no signal, 1=buy reversal, 2=sell reversal
 
 --------------------------
@@ -27,7 +27,7 @@ Dataset
 3- The dataset is fully continuous, with all holiday gaps already forward-filled.
 4- The DATETIME column is strictly chronological and represents the true time index.
 5- The first 130,000 rows of df were copied into df_model, and a 'Label' column was added.
-    The 'Label' column contains trend-reversal labels:
+    The 'Label' column contains price trend-reversal labels:
         0: no reversal
         1: bullish reversal
         2: bearish reversal.
