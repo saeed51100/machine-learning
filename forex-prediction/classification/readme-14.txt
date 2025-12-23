@@ -10,14 +10,18 @@ The overall goal is to detect price trend-reversal points in labeled historical 
 --------------------------
 Goal
 --------------------------
-The dataset contains a "Label" column with price trend-reversal classes:
+The dataset contains a 'CLOSE' price column and a corresponding 'Label' column that indicates price trend-reversal events with three classes:
 0: no reversal
 1: bullish reversal
 2: bearish reversal
 
 The model should learn patterns that indicate reversal points and reproduce this labeling on unseen data.
-Given 120 consecutive unseen hourly candles, the model must predict price trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
-Classes: 0=no signal, 1=buy reversal, 2=sell reversal
+Given 120 consecutive hourly candles as input, the model must predict price trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
+
+The prediction output therefore consists of a sequence of 5 labels, where:
+0 = no signal
+1 = buy (bullish reversal)
+2 = sell (bearish reversal)
 
 --------------------------
 Dataset
