@@ -4,7 +4,7 @@ Please think long and hard.
 Overview
 --------------------------
 This is PART 6 of a multi-part Forex time-series classification pipeline implemented in Python/Jupyter.
-You must assume that PARTS 1-5 are already been completed correctly.
+You must assume that PARTS 1-5 are already been completed correctly and only write the code for PART 6.
 The overall goal is to detect price trend-reversal points in labeled historical H1 Forex data.
 
 --------------------------

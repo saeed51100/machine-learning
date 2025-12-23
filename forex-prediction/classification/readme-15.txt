@@ -4,7 +4,7 @@ Please think long and hard.
 Overview
 --------------------------
 This is PART 5 of a multi-part Forex time-series classification pipeline implemented in Python/Jupyter.
-You must assume that PARTS 1-4 are already been completed correctly.
+You must assume that PARTS 1-4 are already been completed correctly and only write the code for PART 5.
 The overall goal is to detect price trend-reversal points in labeled historical H1 Forex data.
 
 --------------------------
@@ -97,4 +97,3 @@ Write the full code only part 5 (IMBALANCE HANDLING).
        * At the end of the code, the following variables MUST exist:
             - class_weights (dict compatible with Keras)
             - At the end of the code, print the variables required for part 6 (Build, Train and Evaluate the model).
-
