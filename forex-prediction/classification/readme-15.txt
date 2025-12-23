@@ -15,6 +15,8 @@ The dataset contains a 'CLOSE' price column and a corresponding 'Label' column t
 1: bullish reversal
 2: bearish reversal
 
+The labels 1 and 2 mark the beginning and end of the price trend (peaks and valleys) and the rest are marked with 0. So most of the rows in the dataset have labels 0 and there are very few 1 and 2.
+
 The model should learn patterns that indicate reversal points and reproduce this labeling on unseen data.
 Given 120 consecutive hourly candles as input, the model must predict price trend reversal points (0, 1, 2) for the next 5 hours immediately following the 120th candle.
 
@@ -22,8 +24,6 @@ The prediction output therefore consists of a sequence of 5 labels, where:
 0 = no signal
 1 = buy (bullish reversal)
 2 = sell (bearish reversal)
-
-The labels 1 and 2 mark the beginning and end of the price trend (peaks and valleys) and the rest are marked with 0. So most of the rows in the dataset have labels 0 and there are very few 1 and 2.
 
 --------------------------
 Dataset
