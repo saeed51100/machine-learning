@@ -23,6 +23,8 @@ The prediction output therefore consists of a sequence of 5 labels, where:
 1 = buy (bullish reversal)
 2 = sell (bearish reversal)
 
+The labels 1 and 2 mark the beginning and end of the price trend (peaks and valleys) and the rest are marked with 0. So most of the rows in the dataset have labels 0 and there are very few 1 and 2.
+
 --------------------------
 Dataset
 --------------------------
