@@ -65,7 +65,7 @@ All Pipeline Parts
     3- SCALING DATA
     4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
     5- IMBALANCE HANDLING ( Class-weighted )
-    6- Build, Train and Evaluate the model
+    6- Build and Train the model
 
 --------------------------
 Completed parts
