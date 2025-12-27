@@ -1,5 +1,6 @@
 I have written a time-series classification program in Python (Jupyter Notebook) and need help diagnosing why it produces poor results.
 Below, I will share three parts for review.
+Just tell me the most important problem.
 
 1. Program Description
 
