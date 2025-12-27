@@ -46,7 +46,7 @@ Just tell me the most important problem.
     - No shuffling allowed
 
 2. Program Summary
-    - (Approximately 300 lines of code)
+    - (Approximately 250 lines of code)
 
 3. Training Results
     * Final Performance
