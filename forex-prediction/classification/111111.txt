@@ -47,6 +47,273 @@ Just tell me the most important problem.
 
 2. Program Summary
     - (Approximately 250 lines of code)
+    # 8- PART 2 — CHRONOLOGICAL SPLITTING
+
+# ----------------------------
+# Configuration
+# ----------------------------
+TRAIN_RATIO = 0.70
+VAL_RATIO = 0.15
+TEST_RATIO = 0.15
+
+FEATURES = ['OPEN', 'HIGH', 'LOW', 'CLOSE', 'TICKVOL']
+LABEL_COL = 'Label'
+
+
+# ----------------------------
+# Compute split indices
+# ----------------------------
+n_total = len(df_model)
+
+train_end = int(n_total * TRAIN_RATIO)
+val_end = train_end + int(n_total * VAL_RATIO)
+
+# ----------------------------
+# Chronological split
+# ----------------------------
+df_train = df_model.iloc[:train_end].copy()
+df_val = df_model.iloc[train_end:val_end].copy()
+df_test = df_model.iloc[val_end:].copy()
+
+# ----------------------------
+# Separate features and labels
+# (to be used in PART 3: Scaling)
+# ----------------------------
+X_train_df = df_train[FEATURES].copy()
+y_train_df = df_train[LABEL_COL].copy()
+
+X_val_df = df_val[FEATURES].copy()
+y_val_df = df_val[LABEL_COL].copy()
+
+X_test_df = df_test[FEATURES].copy()
+y_test_df = df_test[LABEL_COL].copy()
+
+#%%
+# 9- PART 3: FEATURE SCALING
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+
+# ----------------------------
+# Fit ONLY on training data
+# ----------------------------
+X_train_scaled = scaler.fit_transform(X_train_df)
+
+# ----------------------------
+# Transform validation & test
+# ----------------------------
+X_val_scaled = scaler.transform(X_val_df)
+X_test_scaled = scaler.transform(X_test_df)
+
+# ----------------------------
+# Convert labels to NumPy arrays
+# (important for sequence creation)
+# ----------------------------
+y_train = y_train_df.values
+y_val = y_val_df.values
+y_test = y_test_df.values
+
+# ----------------------------
+# Convert scaled features to NumPy arrays
+# ----------------------------
+X_train = np.asarray(X_train_scaled, dtype=np.float32)
+X_val = np.asarray(X_val_scaled, dtype=np.float32)
+X_test = np.asarray(X_test_scaled, dtype=np.float32)
+
+
+#%%
+# 10- PART 4 — CREATE SEQUENCES (WINDOW_SIZE → X, FORECAST_HORIZON → y)
+
+WINDOW_SIZE = 120
+FORECAST_HORIZON = 5
+
+
+# ------------------------------------------------------------
+# Sequence creation function (time-series safe, no shuffling)
+# ------------------------------------------------------------
+def create_sequences(X, y, window_size, forecast_horizon):
+    X_seq = []
+    y_seq = []
+
+    max_start = len(X) - window_size - forecast_horizon + 1
+
+    for i in range(max_start):
+        X_seq.append(X[i: i + window_size])
+        y_seq.append(y[i + window_size: i + window_size + forecast_horizon])
+
+    return np.array(X_seq), np.array(y_seq)
+
+
+# ------------------------------------------------------------
+# Create sequences for train / validation / test
+# ------------------------------------------------------------
+X_train_seq, y_train_seq = create_sequences(
+    X_train, y_train, WINDOW_SIZE, FORECAST_HORIZON
+)
+
+X_val_seq, y_val_seq = create_sequences(
+    X_val, y_val, WINDOW_SIZE, FORECAST_HORIZON
+)
+
+X_test_seq, y_test_seq = create_sequences(
+    X_test, y_test, WINDOW_SIZE, FORECAST_HORIZON
+)
+
+#%%
+# 11- PART 5 — IMBALANCE HANDLING (Class-Weighted)
+
+# Rules enforced:
+#   - NO oversampling / undersampling / SMOTE
+#   - Class-weighted loss ONLY
+#   - Weights computed from y_train_seq ONLY
+# ============================================================
+
+from sklearn.utils.class_weight import compute_class_weight
+
+# ------------------------------------------------------------
+# y_train_seq shape: (num_samples, FORECAST_HORIZON)
+# We must compute class weights from ALL future labels
+# ------------------------------------------------------------
+
+# Flatten all forecast steps into one long label vector
+y_train_flat = y_train_seq.reshape(-1)
+
+# Unique classes (must be [0,1,2])
+classes = np.unique(y_train_flat)
+
+# Compute balanced class weights
+weights = compute_class_weight(
+    class_weight="balanced",
+    classes=classes,
+    y=y_train_flat
+)
+
+# Convert to Keras-compatible dict
+class_weights = {int(cls): float(w) for cls, w in zip(classes, weights)}
+
+# ------------------------------------------------------------
+# Sanity checks
+# ------------------------------------------------------------
+print("=== CLASS DISTRIBUTION (TRAIN ONLY) ===")
+unique, counts = np.unique(y_train_flat, return_counts=True)
+for u, c in zip(unique, counts):
+    print(f"Class {u}: {c} samples")
+
+print("\n=== CLASS WEIGHTS (Keras compatible) ===")
+for k, v in class_weights.items():
+    print(f"Class {k}: {v:.4f}")
+
+
+#%%
+# 12- PART 6 — Build and Train the Model
+
+NUM_CLASSES = 3
+BATCH_SIZE = 128
+LEARNING_RATE = 1e-3
+
+
+class_weight_tensor = tf.constant(
+    [class_weights[0], class_weights[1], class_weights[2]],
+    dtype=tf.float32
+)
+
+
+# ============================================================
+# Custom weighted sparse categorical cross-entropy
+# (supports multi-step sequence targets)
+# ============================================================
+@tf.keras.utils.register_keras_serializable()
+def weighted_sparse_categorical_crossentropy(y_true, y_pred):
+    """
+    y_true: (batch, horizon)
+    y_pred: (batch, horizon, num_classes)
+    """
+    y_true = tf.cast(y_true, tf.int32)
+
+    # Standard sparse categorical cross-entropy per timestep
+    scce = tf.keras.losses.sparse_categorical_crossentropy(
+        y_true, y_pred, from_logits=False
+    )  # shape: (batch, horizon)
+
+    # Gather class weights for each true label
+    weights = tf.gather(class_weight_tensor, y_true)  # (batch, horizon)
+
+    # Apply weights
+    weighted_loss = scce * weights
+
+    return tf.reduce_mean(weighted_loss)
+
+#%%
+# Model Architecture (Encoder → Sequence Classifier)
+
+inputs = layers.Input(shape=(WINDOW_SIZE, len(FEATURES)))
+
+x = layers.LSTM(
+    128,
+    return_sequences=True,
+    dropout=0.2,
+    recurrent_dropout=0.2
+)(inputs)
+
+x = layers.LSTM(
+    64,
+    return_sequences=False,
+    dropout=0.2,
+    recurrent_dropout=0.2
+)(x)
+
+# Project to forecast horizon
+x = layers.Dense(FORECAST_HORIZON * 64, activation="relu")(x)
+x = layers.Reshape((FORECAST_HORIZON, 64))(x)
+
+# Time-distributed classification head
+outputs = layers.TimeDistributed(
+    layers.Dense(NUM_CLASSES, activation="softmax")
+)(x)
+
+model = models.Model(inputs, outputs)
+#%%
+# Compile
+
+model.compile(
+    optimizer=optimizers.Adam(learning_rate=LEARNING_RATE),
+    loss=weighted_sparse_categorical_crossentropy,
+    metrics=[
+        tf.keras.metrics.SparseCategoricalAccuracy(name="accuracy")
+    ]
+)
+
+model.summary()
+#%%
+# Callbacks
+
+cb_early_stop = callbacks.EarlyStopping(
+    monitor="val_loss",
+    patience=6,
+    restore_best_weights=True
+)
+
+cb_reduce_lr = callbacks.ReduceLROnPlateau(
+    monitor="val_loss",
+    factor=0.5,
+    patience=3,
+    min_lr=1e-6,
+    verbose=1
+)
+#%%
+# Train
+
+history = model.fit(
+    X_train_seq,
+    y_train_seq,
+    validation_data=(X_val_seq, y_val_seq),
+    epochs=200,
+    batch_size=BATCH_SIZE,
+    callbacks=[cb_early_stop, cb_reduce_lr],
+    verbose=1
+)
+print("\nTRAINING COMPLETE!")
 
 3. Training Results
     * Final Performance
