@@ -18,7 +18,7 @@ The current logic correctly detects and labels local peaks (2) and valleys (1). 
     - Only areas before the first detected extremum or after the last detected extremum may remain 0.
 
 * Question
-    How should I modify my existing labeling code so that the spaces between consecutive peaks and valleys are filled with the appropriate trend label (1 or 2) instead of 0, while keeping the existing peak and valley detection logic unchanged?
+    How should I modify my existing labeling code so that the gaps between consecutive peaks and valleys are filled with the appropriate trend label (1 or 2) instead of 0, while keeping the existing peak and valley detection logic unchanged?
 
 // my code:
 def label_reversal_points(
