@@ -1,28 +1,36 @@
-I am building a time-series classification program in Python (Jupyter Notebook) to predict Forex price trend reversals.
+I am developing a time-series classification pipeline in Python (Jupyter Notebook) to identify Forex price trend regimes based on historical price data.
 
 The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1 (hourly) timeframe, with the following characteristics:
+* Dataset Description
     1- The main DataFrame df contains 140,000 rows and 10 columns:
         DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD.
     2- Each row represents one hour of Forex price data.
-    3- The dataset is fully continuous; all market holiday gaps have already been forward-filled.
+    3- The dataset is fully continuous; all weekend and holiday gaps have already been forward-filled.
     4- The DATETIME column is strictly chronological and represents the true time index.
 
+* Objective
     I want to create a new DataFrame named df_model as a copy of df and add a new column called Label, subject to the following rules:
 
 * Label Definition
-    The Label column represents price trend and trend-reversal information derived from the CLOSE price:
+    The Label column should represent the dominant price trend as follows:
         0 → No meaningful trend (sideways / flat movement)
-        1 → Bullish trend or bullish reversal
-        2 → Bearish trend or bearish reversal
+        1 → Bullish trend
+        2 → Bearish trend
 
 * Labeling Rules
-    1- Labels are determined only from the behavior of the CLOSE price.
-    2- If the CLOSE price is increasing for several consecutive periods, the corresponding rows should be labeled as 1 (bullish).
-    3- If the CLOSE price is decreasing for several consecutive periods, the corresponding rows should be labeled as 2 (bearish).
+    1- Labels must be computed exclusively from the CLOSE price.
+    2- A bullish trend (Label = 1) is defined as the CLOSE price increasing over several consecutive periods.
+    3- A bearish trend (Label = 2) is defined as the CLOSE price decreasing over several consecutive periods.
     4- If the price movement is approximately flat, the label should be 0.
-    5- Minor price fluctuations and market noise should be ignored (i.e., small changes within a defined threshold should not be treated as a trend).
+    5- Minor price fluctuations and market noise must be ignored; small price changes within a predefined threshold should not be considered a trend.
 
-* Please write Python code that:
-    - Creates a copy of df named df_model
-    - Computes the Label column according to the above definitions
-    - Is suitable for use in a time-series machine learning pipeline
+* Task
+     Please write Python code that:
+        - Creates a copy of df named df_model
+        - Computes and adds the Label column according to the rules above
+        - Uses parameters such as:
+            * lookback window length
+            * minimum price change (or percentage change) threshold
+            * so that the labeling method is robust, configurable, and reusable
+
+            Is suitable for integration into a time-series ML pipeline (e.g., feature engineering prior to model training)
