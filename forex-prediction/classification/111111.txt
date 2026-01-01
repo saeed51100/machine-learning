@@ -28,9 +28,11 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
      Please write Python code that:
         - Creates a copy of df named df_model
         - Computes and adds the Label column according to the rules above
-        - Uses parameters such as:
-            * lookback window length
-            * minimum price change (or percentage change) threshold
-            * so that the labeling method is robust, configurable, and reusable
-
-            Is suitable for integration into a time-series ML pipeline (e.g., feature engineering prior to model training)
+        - so that the labeling method is robust, configurable, and reusable
+        - Is suitable for integration into a time-series ML pipeline (e.g., feature engineering prior to model training)
+        - Ensure strict causality (no future data leakage); labels must rely only on past and current CLOSE values
+        - Use a configurable rolling lookback window and evaluate trend direction via aggregated price change (e.g., cumulative return or slope)
+        - Apply a noise filter using absolute and/or percentage thresholds to suppress insignificant movements
+        - Incorporate a minimum trend persistence requirement (e.g., consecutive confirmations) to avoid whipsaws
+        - Handle boundary conditions explicitly (warm-up period, NaNs at series start)
+        - Keep labeling logic fully parameterized and reproducible (no hard-coded constants)
