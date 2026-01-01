@@ -1,3 +1,4 @@
+Please think long and hard.
 I am developing a time-series classification pipeline in Python (Jupyter Notebook) to identify Forex price trend regimes based on historical price data.
 
 The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1 (hourly) timeframe, with the following characteristics:
