@@ -8,15 +8,17 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
     3- The dataset is fully continuous; all weekend and holiday gaps have already been forward-filled.
     4- The DATETIME column is strictly chronological and represents the true time index.
 
-I written the following code that adds a "Label" column to df_model with the following specifications:
-The Label column should represent the dominant price trend as follows:
-The Label column shows the dominant price trend as follows:
-	1 → Bullish trend
-        2 → Bearish trend
-My code works correctly and labels price trends with 1 and 2.
-My question:
-Now I want to add a new logic to my code that also labels flat trends with 0:
-0 → No meaningful trend (sideways / flat movement)
-Please update my code so that the logic of 1s and 2s does not change and then the labeling of zeros is done.
+I have written code that adds a Label column to df_model to represent the dominant price trend:
+    1 → Bullish trend
+    2 → Bearish trend
 
+The current code works correctly and assigns labels 1 and 2 as intended.
+
+* Question
+I now want to extend the existing logic to also label flat (sideways) market conditions:
+0 → No meaningful trend (sideways / flat movement)
+
+Please update my code so that:
+    - The existing logic for labeling 1 (bullish) and 2 (bearish) remains unchanged.
+    - The new label 0 is added only for flat trend conditions.
 // my code:
