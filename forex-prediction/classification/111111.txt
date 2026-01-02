@@ -27,11 +27,4 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
 
 * Task
      Please write Python code that:
-        - Creates a copy of df named df_model
-        - Computes and adds the Label column according to the rules above
-        - Uses parameters such as:
-            * lookback window length
-            * minimum price change (or percentage change) threshold
-            * so that the labeling method is robust, configurable, and reusable
-
-            Is suitable for integration into a time-series ML pipeline (e.g., feature engineering prior to model training)
+        Based on the above information, write code that identifies and labels trends, like the Zigzag indicator.
