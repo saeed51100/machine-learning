@@ -27,12 +27,11 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
 
 * Task
      Please write Python code that:
+        - Creates a copy of df named df_model
+        - Computes and adds the Label column according to the rules above
+        - Uses parameters such as:
+            * lookback window length
+            * minimum price change (or percentage change) threshold
+            * so that the labeling method is robust, configurable, and reusable
 
-        - Creates a copy of df named df_model and adds a new Label column
-        - Computes labels using only past and current CLOSE values, ensuring strict causality and no future data leakage
-        - Determines trend direction using a configurable rolling lookback window and an aggregated price-change metric (e.g., cumulative return or slope)
-        - Applies noise filtering via configurable absolute and/or percentage thresholds to ignore insignificant price movements
-        - Enforces a minimum trend persistence requirement (e.g., consecutive confirmations) to reduce whipsaws
-        - Explicitly handles boundary conditions (warm-up period, initial NaNs)
-        - Keeps the entire labeling logic fully parameterized, reproducible, and reusable
-        - Is robust and suitable for integration into a time-series machine learning pipeline (e.g., feature engineering before model training)
+            Is suitable for integration into a time-series ML pipeline (e.g., feature engineering prior to model training)
