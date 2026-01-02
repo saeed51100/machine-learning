@@ -1,6 +1,5 @@
 Please think long and hard.
 I am developing a time-series classification pipeline in Python (Jupyter Notebook) to identify Forex price trend regimes based on historical price data.
-
 The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1 (hourly) timeframe, with the following characteristics:
 * Dataset Description
     1- The main DataFrame df contains 140,000 rows and 10 columns:
@@ -9,22 +8,15 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
     3- The dataset is fully continuous; all weekend and holiday gaps have already been forward-filled.
     4- The DATETIME column is strictly chronological and represents the true time index.
 
-* Objective
-    I want to create a new DataFrame named df_model as a copy of df and add a new column called Label, subject to the following rules:
-
-* Label Definition
-    The Label column should represent the dominant price trend as follows:
-        0 → No meaningful trend (sideways / flat movement)
-        1 → Bullish trend
+I written the following code that adds a "Label" column to df_model with the following specifications:
+The Label column should represent the dominant price trend as follows:
+The Label column shows the dominant price trend as follows:
+	1 → Bullish trend
         2 → Bearish trend
+My code works correctly and labels price trends with 1 and 2.
+My question:
+Now I want to add a new logic to my code that also labels flat trends with 0:
+0 → No meaningful trend (sideways / flat movement)
+Please update my code so that the logic of 1s and 2s does not change and then the labeling of zeros is done.
 
-* Labeling Rules
-    1- Labels must be computed exclusively from the CLOSE price.
-    2- A bullish trend (Label = 1) is defined as the CLOSE price increasing over several consecutive periods.
-    3- A bearish trend (Label = 2) is defined as the CLOSE price decreasing over several consecutive periods.
-    4- If the price movement is approximately flat, the label should be 0.
-    5- Minor price fluctuations and market noise must be ignored; small price changes within a predefined threshold should not be considered a trend.
-
-* Task
-     Please write Python code that:
-        Based on the above information, write code that identifies and labels trends, like the Zigzag indicator.
+// my code:
