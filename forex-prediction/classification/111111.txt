@@ -18,7 +18,8 @@ The current code works correctly and assigns labels 1 and 2 as intended.
 I now want to extend the existing logic to also label flat (sideways) market conditions:
 0 → No meaningful trend (sideways / flat movement)
 
-Please update my code so that:
+Please completely rewrite the existing code so that all three labels work correctly and:
     - The existing logic for labeling 1 (bullish) and 2 (bearish) remains unchanged.
     - The new label 0 is added only for flat trend conditions.
+
 // my code:
