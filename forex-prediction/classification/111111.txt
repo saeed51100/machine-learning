@@ -16,6 +16,10 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
     The model should learn patterns that indicate price trend and reproduce labeling on unseen data.
 
 * Question
-
+My program uses the following three important parameters, the correct setting of which has a direct impact on the performance of the model:
+1- WINDOW_SIZE = : Number of unseen candles input to the model
+2- FORECAST_HORIZON = : Size of the forecast horizon
+3- TREND_SIZE = Duration and magnitude of a trend
+What is the common value of the above parameters to get good results?
 
 // my code:
