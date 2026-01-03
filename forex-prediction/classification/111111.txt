@@ -1,23 +1,13 @@
 I am developing a time-series classification pipeline in Python (Jupyter Notebook) to identify Forex price trend regimes based on historical price data.
 The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1 (hourly) timeframe, with the following characteristics:
 * Dataset Description
-    1- The main DataFrame df contains 140,000 rows and 10 columns:
-        DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD.
-    2- Each row represents one hour of Forex price data.
-    3- The dataset is fully continuous; all weekend and holiday gaps have already been forward-filled.
-    4- The DATETIME column is strictly chronological and represents the true time index.
-    5- The dataset contains a 'CLOSE' price column and a corresponding 'Label' column that indicates price trend events with three classes:
+     The dataset contains a 'CLOSE' price column and a corresponding 'Label' column that indicates price trend events with three classes:
         0 → No meaningful trend (sideways / flat movement)
         1 → Bullish trend
         2 → Bearish trend
 
-* Goal
-The objective is to train a model that learns temporal patterns associated with price trends and accurately reproduces the labeling on unseen data.
-
 * Question
-My labeling and modeling pipeline relies on the following three key parameters, whose values have a direct impact on model performance:
-    1- WINDOW_SIZE: Number of past (historical) candles provided to the model as input.
-    2- FORECAST_HORIZON: Number of future candles over which the trend is evaluated.
-    3- TREND_SIZE: Minimum duration and magnitude required to qualify a price movement as a trend (e.g., lasting several hours).
+I have written the following code that does the labeling of 0, 1, and 2.
+Please modify my code to be more sensitive and detect smaller trends as well.
 
-What are commonly used or recommended ranges for these parameters in H1 Forex trend classification tasks, and how should they be selected to achieve robust and generalizable results?
+// my code
