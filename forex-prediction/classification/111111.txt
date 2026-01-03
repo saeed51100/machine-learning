@@ -7,7 +7,6 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
         2 → Bearish trend
 
 I have implemented a labeling algorithm that assigns these labels based on price movements.
-However, the current logic is not sufficiently sensitive and fails to detect smaller or shorter-lived trends.
 
 * Request:
 Please modify or improve my existing labeling code to increase its sensitivity so that smaller trend movements are detected, while still avoiding excessive noise or over-labeling.
