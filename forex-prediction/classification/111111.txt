@@ -21,5 +21,3 @@ My program uses the following three important parameters, the correct setting of
 2- FORECAST_HORIZON = : Size of the forecast horizon
 3- TREND_SIZE = Duration and magnitude of a trend ( For example, about a few hours )
 What is the common value of the above parameters to get good results?
-
-// my code:
