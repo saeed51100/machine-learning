@@ -9,17 +9,13 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
     4- The DATETIME column is strictly chronological and represents the true time index.
 
 I have written code that adds a Label column to df_model to represent the dominant price trend:
+    0 → No meaningful trend (sideways / flat movement)
     1 → Bullish trend
     2 → Bearish trend
 
-The current code works correctly and assigns labels 1 and 2 as intended.
+The current code works correctly and assigns labels 0 and 1 and 2 as intended.
 
 * Question
-I now want to extend the existing logic to also label flat (sideways) market conditions:
-0 → No meaningful trend (sideways / flat movement)
-
-Please completely rewrite the existing code so that all three labels work correctly and:
-    - The existing logic for labeling 1 (bullish) and 2 (bearish) remains unchanged.
-    - The new label 0 is added only for flat trend conditions.
+What suggestions do you have for improving the code structure or logic?
 
 // my code:
