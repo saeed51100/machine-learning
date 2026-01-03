@@ -1,4 +1,4 @@
-Please think long and hard.
+
 I am developing a time-series classification pipeline in Python (Jupyter Notebook) to identify Forex price trend regimes based on historical price data.
 The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1 (hourly) timeframe, with the following characteristics:
 * Dataset Description
@@ -13,11 +13,12 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
         2 → Bearish trend
 
 * Goal
-    The model should learn patterns that indicate price trend and reproduce labeling on unseen data.
+The objective is to train a model that learns temporal patterns associated with price trends and accurately reproduces the labeling on unseen data.
 
 * Question
-My program uses the following three important parameters, the correct setting of which has a direct impact on the performance of the model:
-1- WINDOW_SIZE = : Number of unseen candles input to the model
-2- FORECAST_HORIZON = : Size of the forecast horizon
-3- TREND_SIZE = Duration and magnitude of a trend ( For example, about a few hours )
-What is the common value of the above parameters to get good results?
+My labeling and modeling pipeline relies on the following three key parameters, whose values have a direct impact on model performance:
+    1- WINDOW_SIZE: Number of past (historical) candles provided to the model as input.
+    2- FORECAST_HORIZON: Number of future candles over which the trend is evaluated.
+    3- TREND_SIZE: Minimum duration and magnitude required to qualify a price movement as a trend (e.g., lasting several hours).
+
+What are commonly used or recommended ranges for these parameters in H1 Forex trend classification tasks, and how should they be selected to achieve robust and generalizable results?
