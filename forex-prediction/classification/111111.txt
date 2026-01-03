@@ -1,15 +1,21 @@
 Please think long and hard.
 I am developing a time-series classification pipeline in Python (Jupyter Notebook) to identify Forex price trend regimes based on historical price data.
 The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1 (hourly) timeframe, with the following characteristics:
+* Dataset Description
+    1- The main DataFrame df contains 140,000 rows and 10 columns:
+        DATETIME, DATE, TIME, OPEN, HIGH, LOW, CLOSE, TICKVOL, VOL, SPREAD.
+    2- Each row represents one hour of Forex price data.
+    3- The dataset is fully continuous; all weekend and holiday gaps have already been forward-filled.
+    4- The DATETIME column is strictly chronological and represents the true time index.
+    5- The dataset contains a 'CLOSE' price column and a corresponding 'Label' column that indicates price trend events with three classes:
+        0 → No meaningful trend (sideways / flat movement)
+        1 → Bullish trend
+        2 → Bearish trend
 
-I have written following code that adds a Label column to df_model to represent the dominant price trend:
-    0 → No meaningful trend
-    1 → Bullish trend
-    2 → Bearish trend
-
-The current code works correctly and assigns labels 0 and 1 and 2 as intended.
+* Goal
+    The model should learn patterns that indicate price trend and reproduce labeling on unseen data.
 
 * Question
-Please write me a clean version of the code.
+
 
 // my code:
