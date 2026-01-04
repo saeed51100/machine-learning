@@ -10,6 +10,9 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
 * Request
 I have implemented a labeling algorithm that assigns these labels based on price movements.
 I want to fine-tune my program.
+Later in training the model I want to use 72 inputs and a 36 prediction window:
+WINDOW_SIZE = 72
+FORECAST_HORIZON = 36
 Please change the parameter values wherever necessary to get the best results.
 
 // My code:
