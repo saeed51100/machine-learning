@@ -9,10 +9,7 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
 
 * Request
 I have implemented a labeling algorithm that assigns these labels based on price movements.
-Please carefully review the code below and propose one critical improvement that addresses the most important weakness in the current implementation.
-Your goal is to make the labeling logic more robust, scalable, and suitable for large time-series datasets.
-Focus only on this single improvement, explain why it is necessary, and provide the complete corrected version of the code incorporating that improvement.
-
+Please Instead of a single global prominence threshold, scale it by local volatility ( Adaptive prominence ).
 // My code:
 def label_trend_points(
         close,
