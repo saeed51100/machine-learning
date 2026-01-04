@@ -6,9 +6,8 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
         1 → Bullish trend
         2 → Bearish trend
 
+* Request
 I have implemented a labeling algorithm that assigns these labels based on price movements.
-
-* Request:
-Please modify or improve my existing labeling code to increase its sensitivity so that smaller trend movements are detected, while still avoiding excessive noise or over-labeling.
-
+Please study the following code carefully and make the necessary improvements to achieve a robust and scalable code in my code.
+Focus on only one important improvement (the most important weakness) and write me the complete and corrected version of the code.
 // my code
