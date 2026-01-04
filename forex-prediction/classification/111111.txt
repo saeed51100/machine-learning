@@ -9,7 +9,9 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
 
 * Request
 I have implemented a labeling algorithm that assigns these labels based on price movements.
-Please Instead of a single global prominence threshold, scale it by local volatility ( Adaptive prominence ).
+I want to fine-tune my program.
+Please change the parameter values wherever necessary to get the best results.
+
 // My code:
 def label_trend_points(
         close,
@@ -58,26 +60,42 @@ def label_trend_points(
     local_vol_price = ema(ret, vol_window) * close
 
     # --------------------------------------------------
-    # Smoothing + extrema detection
+    # Smoothing + extrema detection (adaptive prominence)
     # --------------------------------------------------
     win = min(smoothing_window, n - 1)
     if win % 2 == 0:
         win -= 1
 
     smoothed = savgol_filter(close, win, polyorder)
-    prom = np.std(close) * base_prom_factor or 1e-12
 
-    peaks, _ = find_peaks(smoothed, distance=distance, prominence=prom)
-    vals, _ = find_peaks(-smoothed, distance=distance, prominence=prom)
+    # Step 1: candidate extrema WITHOUT prominence
+    peaks, _ = find_peaks(smoothed, distance=distance)
+    vals, _ = find_peaks(-smoothed, distance=distance)
 
-    peak_prom = peak_prominences(smoothed, peaks)[0] if len(peaks) else []
-    val_prom = peak_prominences(-smoothed, vals)[0] if len(vals) else []
+    # Step 2: compute true prominences
+    peak_prom = peak_prominences(smoothed, peaks)[0] if len(peaks) else np.array([])
+    val_prom = peak_prominences(-smoothed, vals)[0] if len(vals) else np.array([])
 
-    extrema = (
-            [(i, 2, p) for i, p in zip(peaks, peak_prom)] +
-            [(i, 1, p) for i, p in zip(vals, val_prom)]
-    )
+    # Step 3: adaptive prominence threshold
+    # prom_i = base_prom_factor * local_volatility_i
+    adaptive_prom = base_prom_factor * np.maximum(local_vol_price, 1e-12)
+
+    # Step 4: filter extrema by local volatility–scaled prominence
+    peaks_f = [
+        (i, 2, p)
+        for i, p in zip(peaks, peak_prom)
+        if p >= adaptive_prom[i]
+    ]
+
+    vals_f = [
+        (i, 1, p)
+        for i, p in zip(vals, val_prom)
+        if p >= adaptive_prom[i]
+    ]
+
+    extrema = peaks_f + vals_f
     extrema.sort(key=lambda x: x[0])
+
     if not extrema:
         return labels
 
@@ -176,7 +194,3 @@ def label_trend_points(
         print("Extrema kept:", len(final_ext))
 
     return labels
-
-# 5- baseline (close-only)
-
-df_model['Label'] = label_trend_points(df_model['CLOSE'].values, verbose=True)
