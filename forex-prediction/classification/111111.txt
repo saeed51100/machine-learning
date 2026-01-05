@@ -182,3 +182,5 @@ def label_trend_points(
         print("Extrema kept:", len(final_ext))
 
     return labels
+
+df_model['Label'] = label_trend_points(df_model['CLOSE'].values, verbose=True)
