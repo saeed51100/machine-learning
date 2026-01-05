@@ -1,3 +1,4 @@
+please think long and hard.
 I am developing a time-series classification pipeline in Python (Jupyter Notebook) to identify Forex price trend regimes based on historical price data.
 The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1 (hourly) timeframe, with the following characteristics:
 * Dataset Description
@@ -11,7 +12,7 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
 I have implemented a labeling function that assigns these labels based on price movements and correctly identifies major trend regimes.
 I now want to extend this approach to additionally detect and label smaller sub-trend movements that occur within larger trends, without modifying the existing behavior for large-scale trend detection.
 In the current implementation, the label_trend_points function is applied once to df_model, labeling the entire dataset globally.
-I would like to reuse the same function to identify and relabel sub-trends only within trend segments that are 24 candles or longer, while preserving the original labels for shorter segments and the overall trend structure.
+I would like to reuse the same function to identify and relabel sub-trends only within trend segments that are 18 candles or longer, while preserving the original labels for shorter segments and the overall trend structure.
 Please apply the existing label_trend_points function hierarchically, first to the entire data set for major trends, and then to trends larger than 18 candles.
 Please write me the full and modified version of the code.
 
