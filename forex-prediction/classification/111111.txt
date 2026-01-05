@@ -9,8 +9,11 @@ The dataset consists of approximately 170,000 rows of Forex OHLCV data on the H1
 
 * Request
 I have implemented a labeling function that assigns these labels based on price movements and successfully detects and labels major (large-scale) trends.
-I now want to extend this same approach to also detect and label smaller (sub-trend) movements that occur within larger trends, without altering the existing behavior for large trends.
+I now want to extend this same logic to additionally detect and label smaller-scale movements (sub-trends) that occur within larger trends, while preserving the current behavior and labels for major trends.
 Please modify the code below to support multi-scale trend detection using the same underlying logic, and provide the complete, revised version of the code.
+* Notes:
+1- Each major trend may contain 0, 1, or 2 sub-trends.
+2- Price fluctuations spanning 3 candles or fewer should be treated as noise and must not be labeled as sub-trends.
 
 // My code:
 def label_trend_points(
