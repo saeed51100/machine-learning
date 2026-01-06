@@ -43,7 +43,6 @@ Dataset
     - No shuffling is allowed
 9- The final objective is to reproduce the 'Label' column on unseen data.
 
-
 --------------------------
 Required hyperparameters
 --------------------------
