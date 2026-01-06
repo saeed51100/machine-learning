@@ -18,10 +18,10 @@ The dataset contains a 'CLOSE' price column and a corresponding 'Label' column t
 The model should learn patterns that indicate trend points and reproduce this labeling on unseen data.
 Given 72 consecutive hourly candles as input, the model must predict price trend points (0, 1, 2) for the next 36 hours immediately following the 72th candle.
 
-The prediction output therefore consists of a sequence of 5 labels, where:
+The prediction output therefore consists of a sequence of 36 labels, where:
 0 = no signal
-1 = buy (bullish reversal)
-2 = sell (bearish reversal)
+1 = buy (bullish trend)
+2 = sell (bearish trend)
 
 --------------------------
 Dataset
@@ -31,10 +31,10 @@ Dataset
 3- The dataset is fully continuous, with all holiday gaps already forward-filled.
 4- The DATETIME column is strictly chronological and represents the true time index.
 5- The first 130,000 rows of df were copied into df_model, and a 'Label' column was added.
-    The 'Label' column contains price trend-reversal labels:
-        0: no reversal
-        1: bullish reversal
-        2: bearish reversal.
+    The 'Label' column contains price trend labels:
+        0: No meaningful trend
+        1: bullish trend
+        2: bearish trend.
 6- df_model (130,000 rows) will be used for training, validation, and testing.
 7- The remaining 10,000 rows of df (rows 130,001 to 140,000) are completely unseen and reserved for real-world testing.
 8- Label distribution in df_model is highly imbalanced:
