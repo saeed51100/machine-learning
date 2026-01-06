@@ -37,15 +37,11 @@ Dataset
         2: bearish trend.
 6- df_model (130,000 rows) will be used for training, validation, and testing.
 7- The remaining 10,000 rows of df (rows 130,001 to 140,000) are completely unseen and reserved for real-world testing.
-8- Label distribution in df_model is highly imbalanced:
-    - Class 0 ≈ 98.55%
-    - Class 1 ≈ 0.73%
-    - Class 2 ≈ 0.73%
-9- When splitting df_model, strict chronological splitting must be used:
+8- When splitting df_model, strict chronological splitting must be used:
     - Either 70% train / 15% validation / 15% test, or
     - Walk-forward validation
     - No shuffling is allowed
-10- The final objective is to reproduce the 'Label' column on unseen data.
+9- The final objective is to reproduce the 'Label' column on unseen data.
 
 --------------------------
 Required hyperparameters
