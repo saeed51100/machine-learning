@@ -47,8 +47,8 @@ Dataset
 --------------------------
 Required hyperparameters
 --------------------------
-WINDOW_SIZE = 120
-FORECAST_HORIZON = 5
+WINDOW_SIZE = 72
+FORECAST_HORIZON = 36
 FEATURES = ['OPEN','HIGH','LOW','CLOSE','TICKVOL']
 
 
