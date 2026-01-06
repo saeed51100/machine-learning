@@ -57,8 +57,7 @@ All Pipeline Parts
     2- CHRONOLOGICAL SPLITTING
     3- SCALING DATA
     4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
-    5- IMBALANCE HANDLING ( Class-weighted )
-    6- Build and Train the model
+    5- Build and Train the model
 
 --------------------------
 Completed parts
