@@ -67,7 +67,6 @@ I have done the following parts:
     2- CHRONOLOGICAL SPLITTING
     3- SCALING DATA
     4- Create sequences (WINDOW_SIZE → X, FORECAST_HORIZON → y)
-    5- IMBALANCE HANDLING ( Class-weighted )
 
 --------------------------
 VARIABLES FROM PREVIOUS PART
@@ -78,11 +77,7 @@ VARIABLES FROM PREVIOUS PART
 --------------------------
 Your task
 --------------------------
-Write the full code only part 6 ( Build, Train and Evaluate the model ).
-     Note:
+Write the full code only part 5 ( Build, Train the model ).
 
-        class_weight is incompatible with sequence (multi-step) targets.
-        A custom loss function is required for time-distributed classification.
-        You must implement a weighted loss function to handle class imbalance.
 
 
