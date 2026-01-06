@@ -3,8 +3,8 @@ Please think long and hard.
 --------------------------
 Overview
 --------------------------
-This is PART 5 of a multi-part Forex time-series classification pipeline implemented in Python/Jupyter.
-You must assume that PARTS 1-4 are already been completed correctly and only write the code for PART 5.
+This is PART 6 of a multi-part Forex time-series classification pipeline implemented in Python/Jupyter.
+You must assume that PARTS 1-5 are already been completed correctly and only write the code for PART 6.
 The overall goal is to detect price trend regimes in labeled historical H1 Forex data.
 
 --------------------------
@@ -77,15 +77,7 @@ VARIABLES FROM PREVIOUS PART
 --------------------------
 Your task
 --------------------------
-Write the full code only part 5 (IMBALANCE HANDLING).
+Write the full code only part 5 ( Build, Train the model ).
 
-    Imbalance Handling Rules:
 
-       * Imbalance Handling Rules
-            - Do NOT use SMOTE, oversampling, undersampling, or row duplication
-            - Use class-weighted loss ONLY
-            - Compute weights from y_train_seq ONLY
 
-       * At the end of the code, the following variables MUST exist:
-            - class_weights (dict compatible with Keras)
-            - At the end of the code, print the variables required for part 6 (Build, Train and Evaluate the model).
