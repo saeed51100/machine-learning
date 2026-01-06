@@ -3,8 +3,8 @@ Please think long and hard.
 --------------------------
 Overview
 --------------------------
-This is PART 6 of a multi-part Forex time-series classification pipeline implemented in Python/Jupyter.
-You must assume that PARTS 1-5 are already been completed correctly and only write the code for PART 6.
+This is PART 5 of a multi-part Forex time-series classification pipeline implemented in Python/Jupyter.
+You must assume that PARTS 1-4 are already been completed correctly and only write the code for PART 5.
 The overall goal is to detect price trend regimes in labeled historical H1 Forex data.
 
 --------------------------
