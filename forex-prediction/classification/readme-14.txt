@@ -80,5 +80,5 @@ Your task
 Write the full code only part 4 (Create sequences).
 
     Additional Requirements:
-        - At the end of the code, print the variables required for part 5 (IMBALANCE HANDLING).
+        - At the end of the code, print the variables required for part 5 (Build and Train the model).
 
