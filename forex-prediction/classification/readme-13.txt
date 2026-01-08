@@ -77,4 +77,4 @@ Write the full code only for the following parts:
     3- Scaling using only training data
 
     * additional requirements:
-        At the end of the code, print the variables required for part 4 (Create sequences).
+        At the end of the code, print() the variables required for part 4 (Create sequences).
