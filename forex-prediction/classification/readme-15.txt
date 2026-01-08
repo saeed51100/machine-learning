@@ -76,7 +76,7 @@ VARIABLES FROM PREVIOUS PART
 --------------------------
 Your task
 --------------------------
-Write the full code only part 5 ( Build, Train the model ).
+Write the full code only part 5 ( Build and Train the model ).
 
 
 
