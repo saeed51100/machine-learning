@@ -38,8 +38,7 @@ Dataset
 6- df_model (130,000 rows) will be used for training, validation, and testing.
 7- The remaining 10,000 rows of df (rows 130,001 to 140,000) are completely unseen and reserved for real-world testing.
 8- When splitting df_model, strict chronological splitting must be used:
-    - Either 70% train / 15% validation / 15% test, or
-    - Walk-forward validation
+    - Either 70% train / 15% validation / 15% test
     - No shuffling is allowed
 9- The final objective is to reproduce the 'Label' column on unseen data.
 
